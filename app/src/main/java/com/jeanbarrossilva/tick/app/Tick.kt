@@ -67,7 +67,7 @@ internal fun Tick(modifier: Modifier = Modifier) {
         containerColor = Color.Transparent,
         contentWindowInsets = ScaffoldDefaults
             .contentWindowInsets
-            .only(WindowInsetsSides.Left)
+            .only(WindowInsetsSides.Start)
             .only(WindowInsetsSides.End)
             .only(WindowInsetsSides.Bottom)
     ) { padding ->
