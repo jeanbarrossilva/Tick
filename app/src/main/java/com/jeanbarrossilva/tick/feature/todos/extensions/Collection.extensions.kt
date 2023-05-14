@@ -37,9 +37,10 @@ internal operator fun Collection<ToDoGroup>.get(toDoID: UUID):
 
 /**
  * Returns a [List] containing exactly the same [ToDo]s of this [Collection], except for the one
- * whose [ID][ToDo.id] is the same as the given one and has been replaced by [replacement].
+ * whose [ID][ToDo.id] is the same as the given one and has been replaced by the result of
+ * [replacement].
  *
- * @param id [ID][ToDo.id] of the [ToDo] to be replaced by [replacement].
+ * @param id [ID][ToDo.id] of the [ToDo] to be replaced by the result of [replacement].
  * @param replacement Lambda that receives the [ToDo] being currently iterated and returns the
  * replacement of the one whose [ID][ToDo.id] equals to [id].
  * @throws IllegalStateException If multiple [ToDo]s have the same [ID][ToDo.id].
@@ -61,11 +62,12 @@ internal fun Collection<ToDo>.replacing(id: UUID, replacement: ToDo.() -> ToDo):
 
 /**
  * Returns a [List] containing exactly the same elements of this [Collection], except for the ones
- * that match the [predicate] and have been replaced by [replacement].
+ * that match the [predicate] and have been replaced by the result of [replacement].
  *
  * @param replacement Lambda that receives the element being currently iterated and returns the
  * replacement of the one that matches the [predicate].
- * @param predicate Indicates whether the given element should be replaced by [replacement].
+ * @param predicate Indicates whether the given element should be replaced by the result of
+ * [replacement].
  **/
 
 /*
