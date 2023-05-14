@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -38,8 +39,26 @@ import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 internal const val TO_DOS_ROUTE = "to-dos"
 
 @Composable
+fun ToDos(
+    viewModel: ToDosViewModel,
+    onNavigationToComposer: () -> Unit,
+    onBottomAreaAvailabilityChange: (isAvailable: Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val descriptionLoadable by viewModel.descriptionLoadableFlow.collectAsState()
+
+    ToDos(
+        descriptionLoadable,
+        onToDoToggle = { toDo, isDone -> viewModel.toggle(toDo.id, isDone) },
+        onNavigationToComposer,
+        onBottomAreaAvailabilityChange,
+        modifier
+    )
+}
+
+@Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun ToDos(
+private fun ToDos(
     descriptionLoadable: Loadable<ToDosDescription>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
     onNavigationToComposer: () -> Unit,
