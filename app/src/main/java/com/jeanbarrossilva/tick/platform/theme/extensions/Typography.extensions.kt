@@ -18,6 +18,7 @@ internal infix fun Typography.with(fontFamily: FontFamily): Typography {
         headlineMedium.copy(fontFamily = fontFamily),
         headlineSmall.copy(fontFamily = fontFamily),
         titleLarge.copy(fontFamily = fontFamily),
-        titleMedium.copy(fontFamily = fontFamily)
+        titleMedium.copy(fontFamily = fontFamily),
+        titleSmall.copy(fontFamily = fontFamily)
     )
 }

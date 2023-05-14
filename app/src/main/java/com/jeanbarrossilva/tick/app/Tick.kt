@@ -27,10 +27,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.tick.feature.settings.SETTINGS_ROUTE
 import com.jeanbarrossilva.tick.feature.settings.Settings
 import com.jeanbarrossilva.tick.feature.todos.TO_DOS_ROUTE
 import com.jeanbarrossilva.tick.feature.todos.ToDos
+import com.jeanbarrossilva.tick.feature.todos.ToDosDescription
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
 @Composable
@@ -47,40 +49,44 @@ internal fun Tick(modifier: Modifier = Modifier) {
         if (isBottomAreaAvailable) BottomAppBarDefaults.ContainerElevation else 0.dp
     )
 
-    Scaffold(
-        modifier,
-        bottomBar = {
-            BottomAppBar(tonalElevation = bottomBarTonalElevation) {
-                NavigationBarItem(
-                    selected = route == TO_DOS_ROUTE,
-                    onClick = { navController.navigate(TO_DOS_ROUTE) },
-                    icon = { Icon(TickTheme.Icons.CheckCircle, contentDescription = "To-dos") }
-                )
+    TickTheme {
+        Scaffold(
+            modifier,
+            bottomBar = {
+                BottomAppBar(tonalElevation = bottomBarTonalElevation) {
+                    NavigationBarItem(
+                        selected = route == TO_DOS_ROUTE,
+                        onClick = { navController.navigate(TO_DOS_ROUTE) },
+                        icon = { Icon(TickTheme.Icons.CheckCircle, contentDescription = "To-dos") }
+                    )
 
-                NavigationBarItem(
-                    selected = route == SETTINGS_ROUTE,
-                    onClick = { navController.navigate(SETTINGS_ROUTE) },
-                    icon = { Icon(TickTheme.Icons.Settings, contentDescription = "Settings") }
-                )
-            }
-        },
-        containerColor = Color.Transparent,
-        contentWindowInsets = ScaffoldDefaults
-            .contentWindowInsets
-            .only(WindowInsetsSides.Start)
-            .only(WindowInsetsSides.End)
-            .only(WindowInsetsSides.Bottom)
-    ) { padding ->
-        NavHost(navController, startDestination = TO_DOS_ROUTE) {
-            composable(TO_DOS_ROUTE) {
-                ToDos(
-                    onBottomAreaAvailabilityChange = { isBottomAreaAvailable = it },
-                    Modifier.padding(padding)
-                )
-            }
+                    NavigationBarItem(
+                        selected = route == SETTINGS_ROUTE,
+                        onClick = { navController.navigate(SETTINGS_ROUTE) },
+                        icon = { Icon(TickTheme.Icons.Settings, contentDescription = "Settings") }
+                    )
+                }
+            },
+            containerColor = Color.Transparent,
+            contentWindowInsets = ScaffoldDefaults
+                .contentWindowInsets
+                .only(WindowInsetsSides.Start)
+                .only(WindowInsetsSides.End)
+                .only(WindowInsetsSides.Bottom)
+        ) { padding ->
+            NavHost(navController, startDestination = TO_DOS_ROUTE) {
+                composable(TO_DOS_ROUTE) {
+                    ToDos(
+                        Loadable.Loaded(ToDosDescription.sample),
+                        onToDoToggle = { _, _ -> },
+                        onBottomAreaAvailabilityChange = { isBottomAreaAvailable = it },
+                        Modifier.padding(padding)
+                    )
+                }
 
-            composable(SETTINGS_ROUTE) {
-                Settings()
+                composable(SETTINGS_ROUTE) {
+                    Settings()
+                }
             }
         }
     }
@@ -90,7 +96,5 @@ internal fun Tick(modifier: Modifier = Modifier) {
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun TickPreview() {
-    TickTheme {
-        Tick()
-    }
+    Tick()
 }

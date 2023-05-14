@@ -1,3 +1,5 @@
+import com.jeanbarrossilva.tick.Versions
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -45,6 +47,11 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation("com.jeanbarrossilva.loadable:loadable:1.4.1")
     implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    @Suppress("SpellCheckingInspection")
+    implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")
 }

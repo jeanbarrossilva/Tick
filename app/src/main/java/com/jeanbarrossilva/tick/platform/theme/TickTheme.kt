@@ -35,7 +35,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jeanbarrossilva.tick.platform.theme.extensions.Rubik
+import com.jeanbarrossilva.tick.platform.theme.extensions.colorAttribute
 import com.jeanbarrossilva.tick.platform.theme.extensions.end
 import com.jeanbarrossilva.tick.platform.theme.extensions.start
 import com.jeanbarrossilva.tick.platform.theme.extensions.with
@@ -43,13 +45,13 @@ import com.jeanbarrossilva.tick.platform.theme.sizes.LocalSizes
 import com.jeanbarrossilva.tick.platform.theme.sizes.Sizes
 
 /** Height of [ColorSchemePreview]. **/
-private const val COLOR_SCHEME_PREVIEW_HEIGHT = 1_843
+private const val COLOR_SCHEME_PREVIEW_HEIGHT = 1_909
 
 /** Height of [ShapesPreview]. **/
 private const val SHAPES_PREVIEW_HEIGHT = 898
 
 /** Height of [TypographyPreview]. **/
-private const val TYPOGRAPHY_PREVIEW_HEIGHT = 1_100
+private const val TYPOGRAPHY_PREVIEW_HEIGHT = 1_130
 
 /** [ColorScheme] for when the system theme is dark. **/
 private val DarkColorScheme = darkColorScheme(
@@ -117,6 +119,10 @@ private val LightColorScheme = lightColorScheme(
     scrim = Color(0xFF000000)
 )
 
+/** [android.R.attr.colorControlNormal] with medium visibility. **/
+private val fadedContentColor
+    @Composable get() = colorAttribute(android.R.attr.colorControlNormal).copy(alpha = .5f)
+
 /** Provider of [TickTheme]'s configurations. **/
 internal object TickTheme {
     /** Current [ColorScheme] from the underlying [MaterialTheme]. **/
@@ -152,7 +158,16 @@ internal fun TickTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = if (isSystemInDarkTheme()) DarkColorScheme else LightColorScheme,
         typography = with(Typography() with FontFamily.Rubik) {
-            copy(titleLarge = titleLarge.copy(fontWeight = FontWeight.Bold))
+            copy(
+                titleLarge = titleLarge.copy(fontWeight = FontWeight.ExtraBold),
+                titleMedium = titleSmall.copy(fontSize = 18.sp, fontWeight = FontWeight.Bold),
+                titleSmall = titleSmall.copy(color = fadedContentColor, fontSize = 18.sp),
+                labelLarge = labelMedium.copy(
+                    color = fadedContentColor,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            )
         }
     ) {
         CompositionLocalProvider(
