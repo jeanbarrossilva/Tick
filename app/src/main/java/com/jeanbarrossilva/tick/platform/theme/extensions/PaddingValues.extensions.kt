@@ -13,3 +13,18 @@ internal val PaddingValues.end
 /** Start padding calculated through the [LocalLayoutDirection]. **/
 internal val PaddingValues.start
     @Composable get() = calculateStartPadding(LocalLayoutDirection.current)
+
+/**
+ * Adds the [PaddingValues].
+ *
+ * @param other [PaddingValues] to add to the receiver one.
+ **/
+@Composable
+internal operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
+    return PaddingValues(
+        start + other.start,
+        calculateTopPadding() + other.calculateTopPadding(),
+        end + other.end,
+        calculateBottomPadding() + other.calculateBottomPadding()
+    )
+}

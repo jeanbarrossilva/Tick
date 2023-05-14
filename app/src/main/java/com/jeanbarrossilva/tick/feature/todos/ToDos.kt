@@ -28,12 +28,12 @@ import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.loadable.map
-import com.jeanbarrossilva.tick.feature.todos.extensions.plus
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDo
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
 import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 
 internal const val TO_DOS_ROUTE = "to-dos"
 
@@ -42,6 +42,7 @@ internal const val TO_DOS_ROUTE = "to-dos"
 internal fun ToDos(
     descriptionLoadable: Loadable<ToDosDescription>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
+    onNavigationToComposer: () -> Unit,
     onBottomAreaAvailabilityChange: (isAvailable: Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -78,7 +79,7 @@ internal fun ToDos(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { }) {
+            FloatingActionButton(onClick = onNavigationToComposer) {
                 Icon(TickTheme.Icons.Add, contentDescription = "Add")
             }
         }
@@ -86,7 +87,7 @@ internal fun ToDos(
         LazyColumn(
             Modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
             state = lazyListState,
-            contentPadding = padding + PaddingValues(bottom = 73.dp),
+            contentPadding = padding + PaddingValues(top = spacing) + PaddingValues(bottom = 73.dp),
             verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.extraLarge * 2)
         ) {
             item {
@@ -126,6 +127,7 @@ private fun LoadedToDosPreview() {
         ToDos(
             Loadable.Loaded(ToDosDescription.sample),
             onToDoToggle = { _, _ -> },
+            onNavigationToComposer = { },
             onBottomAreaAvailabilityChange = { }
         )
     }

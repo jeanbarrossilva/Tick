@@ -28,6 +28,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jeanbarrossilva.loadable.Loadable
+import com.jeanbarrossilva.tick.feature.composer.COMPOSER_ROUTE
+import com.jeanbarrossilva.tick.feature.composer.Composer
+import com.jeanbarrossilva.tick.feature.composer.ComposerDescription
 import com.jeanbarrossilva.tick.feature.settings.SETTINGS_ROUTE
 import com.jeanbarrossilva.tick.feature.settings.Settings
 import com.jeanbarrossilva.tick.feature.todos.TO_DOS_ROUTE
@@ -79,8 +82,20 @@ internal fun Tick(modifier: Modifier = Modifier) {
                     ToDos(
                         Loadable.Loaded(ToDosDescription.sample),
                         onToDoToggle = { _, _ -> },
+                        onNavigationToComposer = { navController.navigate(COMPOSER_ROUTE) },
                         onBottomAreaAvailabilityChange = { isBottomAreaAvailable = it },
                         Modifier.padding(padding)
+                    )
+                }
+
+                composable(COMPOSER_ROUTE) {
+                    Composer(
+                        ComposerDescription.sample,
+                        onBackwardsNavigation = navController::popBackStack,
+                        onTitleChange = { },
+                        onDueDateTimeChange = { },
+                        onNavigationToGroups = { },
+                        onDone = { }
                     )
                 }
 
