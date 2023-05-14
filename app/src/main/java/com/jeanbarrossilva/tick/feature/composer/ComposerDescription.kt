@@ -10,13 +10,13 @@ import java.time.LocalDateTime
 internal data class ComposerDescription(
     val title: String,
     val dueDateTime: LocalDateTime?,
-    val groups: SelectableList<String>
+    val toDoGroupNames: SelectableList<String>
 ) : Serializable {
     companion object {
         val sample = ComposerDescription(
             title = ToDo.sample.title,
             dueDateTime = ToDo.sample.dueDateTime,
-            groups = ToDoGroup.samples.map(ToDoGroup::title).selectFirst()
+            toDoGroupNames = ToDoGroup.samples.map(ToDoGroup::title).selectFirst()
         )
     }
 }

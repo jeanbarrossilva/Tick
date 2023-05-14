@@ -92,7 +92,7 @@ internal fun Composer(
 
                 item {
                     Setting(
-                        text = { Text(description.groups.selected) },
+                        text = { Text(description.toDoGroupNames.selected) },
                         action = {
                             Icon(
                                 TickTheme.Icons.forwardsNavigationArrow,
