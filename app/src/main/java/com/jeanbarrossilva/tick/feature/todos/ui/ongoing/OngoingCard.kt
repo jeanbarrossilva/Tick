@@ -18,12 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.feature.todos.extensions.Placeholder
 import com.jeanbarrossilva.tick.feature.todos.extensions.capitalized
 import com.jeanbarrossilva.tick.feature.todos.extensions.`if`
 import com.jeanbarrossilva.tick.feature.todos.extensions.placeholder
 import com.jeanbarrossilva.tick.feature.todos.extensions.relative
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDo
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
 @Composable

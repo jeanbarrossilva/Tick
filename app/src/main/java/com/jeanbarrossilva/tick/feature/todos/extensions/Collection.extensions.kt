@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.feature.todos.extensions
 
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDo
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDescription
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
 import java.util.UUID
 
 /**
@@ -17,14 +17,14 @@ internal operator fun Collection<ToDo>.get(id: UUID): ToDo? {
 }
 
 /**
- * Gets the [ToDoGroupDescription] that has a [ToDo] whose [ID][ToDo.id] equals to the given one and
+ * Gets the [ToDoGroup] that has a [ToDo] whose [ID][ToDo.id] equals to the given one and
  * the found [ToDo] itself.
  *
  * @param toDoID [ID][ToDo.id] of the [ToDo] to be obtained.
  **/
 @Suppress("KDocUnresolvedReference")
-internal operator fun Collection<ToDoGroupDescription>.get(toDoID: UUID):
-    Pair<ToDoGroupDescription, ToDo>? {
+internal operator fun Collection<ToDoGroup>.get(toDoID: UUID):
+    Pair<ToDoGroup, ToDo>? {
     @Suppress("UNCHECKED_CAST")
     return associate { toDoGroupDescription ->
         toDoGroupDescription to toDoGroupDescription.toDos[toDoID]
@@ -32,7 +32,7 @@ internal operator fun Collection<ToDoGroupDescription>.get(toDoID: UUID):
         .filterValues { toDo -> toDo != null }
         .entries
         .firstOrNull()
-        ?.toPair() as Pair<ToDoGroupDescription, ToDo>?
+        ?.toPair() as Pair<ToDoGroup, ToDo>?
 }
 
 /**

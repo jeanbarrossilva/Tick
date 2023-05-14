@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.app.R
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.extensions.Placeholder
 import com.jeanbarrossilva.tick.feature.todos.extensions.`if`
 import com.jeanbarrossilva.tick.feature.todos.extensions.placeholder
@@ -30,7 +32,7 @@ object ToDoGroupDefaults {
 
 @Composable
 internal fun ToDoGroup(
-    description: ToDoGroupDescription,
+    description: ToDoGroup,
     onToDoToggle: (ToDo, isDone: Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -43,7 +45,7 @@ internal fun ToDoGroup(
 
 @Composable
 internal fun ToDoGroup(
-    descriptionLoadable: Loadable<ToDoGroupDescription>,
+    descriptionLoadable: Loadable<ToDoGroup>,
     onToDoToggle: (ToDo, isDone: Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -59,7 +61,7 @@ internal fun ToDoGroup(
             Arrangement.spacedBy(TickTheme.sizes.extraSmall)
         ) {
             Text(
-                descriptionLoadable.ifLoaded(ToDoGroupDescription::title).orEmpty(),
+                descriptionLoadable.ifLoaded(ToDoGroup::title).orEmpty(),
                 Modifier
                     .placeholder(
                         Placeholder.Text { titleStyle },
@@ -73,8 +75,8 @@ internal fun ToDoGroup(
             Text(
                 pluralStringResource(
                     R.plurals.reminder_count,
-                    descriptionLoadable.ifLoaded(ToDoGroupDescription::toDos)?.size ?: 0,
-                    descriptionLoadable.ifLoaded(ToDoGroupDescription::toDos)?.size ?: 0
+                    descriptionLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0,
+                    descriptionLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0
                 ),
                 Modifier
                     .placeholder(
@@ -121,7 +123,7 @@ private fun LoadingToDoGroupPreview() {
 private fun LoadedToDoGroupPreview() {
     TickTheme {
         Surface(color = TickTheme.colorScheme.background) {
-            ToDoGroup(ToDoGroupDescription.sample, onToDoToggle = { _, _ -> })
+            ToDoGroup(ToDoGroup.sample, onToDoToggle = { _, _ -> })
         }
     }
 }

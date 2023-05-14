@@ -29,7 +29,7 @@ import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.loadable.map
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
 import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
@@ -79,7 +79,7 @@ private fun ToDos(
     }
     val toDoGroupDescriptionsLoadable = remember(descriptionLoadable) {
         descriptionLoadable.map { description ->
-            description.toDoGroupDescriptions.serialize()
+            description.toDoGroups.serialize()
         }
     }
 

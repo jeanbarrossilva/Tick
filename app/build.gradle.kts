@@ -50,7 +50,7 @@ dependencies {
     implementation("com.jeanbarrossilva.loadable:loadable:1.4.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.4")
 
     @Suppress("SpellCheckingInspection")
     implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")

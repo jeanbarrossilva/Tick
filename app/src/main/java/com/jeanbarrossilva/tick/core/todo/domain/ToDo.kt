@@ -1,10 +1,10 @@
-package com.jeanbarrossilva.tick.feature.todos.ui.group
+package com.jeanbarrossilva.tick.core.todo.domain
 
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
 
-internal data class ToDo(
+data class ToDo internal constructor(
     val id: UUID,
     val title: String,
     val dueDateTime: LocalDateTime,

@@ -1,12 +1,12 @@
-package com.jeanbarrossilva.tick.feature.todos.ui.group
+package com.jeanbarrossilva.tick.core.todo.domain
 
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
 
-internal data class ToDoGroupDescription(val title: String, val toDos: List<ToDo>) : Serializable {
+data class ToDoGroup internal constructor(val title: String, val toDos: List<ToDo>) : Serializable {
     companion object {
-        val sample = ToDoGroupDescription(
+        val sample = ToDoGroup(
             title = "Travels",
             toDos = listOf(
                 ToDo.sample,
@@ -26,7 +26,7 @@ internal data class ToDoGroupDescription(val title: String, val toDos: List<ToDo
         )
         val samples = listOf(
             sample,
-            ToDoGroupDescription(
+            ToDoGroup(
                 title = "Housework",
                 toDos = listOf(
                     ToDo(

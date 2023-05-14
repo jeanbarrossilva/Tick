@@ -1,9 +1,9 @@
 package com.jeanbarrossilva.tick.feature.composer
 
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
 import com.jeanbarrossilva.tick.feature.composer.selectable.SelectableList
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDo
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDescription
 import java.io.Serializable
 import java.time.LocalDateTime
 
@@ -16,7 +16,7 @@ internal data class ComposerDescription(
         val sample = ComposerDescription(
             title = ToDo.sample.title,
             dueDateTime = ToDo.sample.dueDateTime,
-            groups = ToDoGroupDescription.samples.map(ToDoGroupDescription::title).selectFirst()
+            groups = ToDoGroup.samples.map(ToDoGroup::title).selectFirst()
         )
     }
 }
