@@ -40,17 +40,17 @@ fun SettingGroup(
 ) {
     val scope = remember(::SettingGroupScope)
 
+    DisposableEffect(Unit) {
+        scope.content()
+        onDispose { }
+    }
+
     Column(modifier) {
         Setting(text, action, onClick = null)
 
         AnimatedVisibility(visible = isExpanded) {
             Column {
                 Divider()
-
-                DisposableEffect(Unit) {
-                    scope.content()
-                    onDispose { }
-                }
 
                 scope.metadata.forEachIndexed { index, metadata ->
                     Setting(
