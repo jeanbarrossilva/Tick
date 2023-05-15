@@ -25,7 +25,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.extensions.backwardsNavigationArrow
+import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
+import com.jeanbarrossilva.tick.feature.composer.selectable.SelectableList
 import com.jeanbarrossilva.tick.feature.composer.ui.reminder.ReminderSetting
 import com.jeanbarrossilva.tick.platform.setting.Setting
 import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
@@ -38,7 +42,9 @@ const val COMPOSER_ROUTE = "composer"
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun Composer(
-    description: ComposerDescription,
+    title: String,
+    dueDateTime: LocalDateTime?,
+    toDoGroupNames: SelectableList<String>,
     onBackwardsNavigation: () -> Unit,
     onTitleChange: (title: String) -> Unit,
     onDueDateTimeChange: (dueDate: LocalDateTime?) -> Unit,
@@ -60,7 +66,7 @@ internal fun Composer(
         },
         floatingActionButton = {
             AnimatedVisibility(
-                visible = description.title.isNotBlank(),
+                visible = title.isNotBlank(),
                 enter = fadeIn() + slideInVertically { it },
                 exit = fadeOut() + slideOutVertically { it }
             ) {
@@ -79,7 +85,7 @@ internal fun Composer(
             ) {
                 item {
                     TextField(
-                        description.title,
+                        title,
                         onTitleChange,
                         Modifier.fillMaxWidth(),
                         label = { Text("Title") }
@@ -87,12 +93,12 @@ internal fun Composer(
                 }
 
                 item {
-                    ReminderSetting(description.dueDateTime, onDueDateTimeChange)
+                    ReminderSetting(dueDateTime, onDueDateTimeChange)
                 }
 
                 item {
                     Setting(
-                        text = { Text(description.toDoGroupNames.selected) },
+                        text = { Text(toDoGroupNames.selected) },
                         action = {
                             Icon(
                                 TickTheme.Icons.forwardsNavigationArrow,
@@ -114,7 +120,9 @@ internal fun Composer(
 private fun ComposerPreview() {
     TickTheme {
         Composer(
-            ComposerDescription.sample,
+            ToDo.sample.title,
+            ToDo.sample.dueDateTime,
+            ToDoGroup.samples.map(ToDoGroup::title).selectFirst(),
             onBackwardsNavigation = { },
             onTitleChange = { },
             onDueDateTimeChange = { },

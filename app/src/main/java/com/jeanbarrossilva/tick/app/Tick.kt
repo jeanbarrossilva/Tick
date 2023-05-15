@@ -28,9 +28,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jeanbarrossilva.tick.app.extensions.toDos
+import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.COMPOSER_ROUTE
 import com.jeanbarrossilva.tick.feature.composer.Composer
-import com.jeanbarrossilva.tick.feature.composer.ComposerDescription
+import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
 import com.jeanbarrossilva.tick.feature.settings.SETTINGS_ROUTE
 import com.jeanbarrossilva.tick.feature.settings.Settings
 import com.jeanbarrossilva.tick.feature.todos.TO_DOS_ROUTE
@@ -84,7 +86,9 @@ internal fun Tick(modifier: Modifier = Modifier) {
 
                 composable(COMPOSER_ROUTE) {
                     Composer(
-                        ComposerDescription.sample,
+                        ToDo.sample.title,
+                        ToDo.sample.dueDateTime,
+                        ToDoGroup.samples.map(ToDoGroup::title).selectFirst(),
                         onBackwardsNavigation = navController::popBackStack,
                         onTitleChange = { },
                         onDueDateTimeChange = { },
