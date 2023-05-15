@@ -27,9 +27,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
+import com.jeanbarrossilva.loadable.list.SerializableList
 import com.jeanbarrossilva.loadable.list.serialize
-import com.jeanbarrossilva.loadable.map
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
 import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
@@ -45,10 +46,12 @@ fun ToDos(
     onBottomAreaAvailabilityChange: (isAvailable: Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val descriptionLoadable by viewModel.descriptionLoadableFlow.collectAsState()
+    val ongoingToDoLoadable by viewModel.ongoingToDoLoadable.collectAsState()
+    val groupsLoadable by viewModel.groupsLoadableFlow.collectAsState()
 
     ToDos(
-        descriptionLoadable,
+        ongoingToDoLoadable,
+        groupsLoadable,
         onToDoToggle = { toDo, isDone -> viewModel.toggle(toDo.id, isDone) },
         onNavigationToComposer,
         onBottomAreaAvailabilityChange,
@@ -59,7 +62,8 @@ fun ToDos(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun ToDos(
-    descriptionLoadable: Loadable<ToDosDescription>,
+    ongoingToDoLoadable: Loadable<ToDo>,
+    groupsLoadable: Loadable<SerializableList<ToDoGroup>>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
     onNavigationToComposer: () -> Unit,
     onBottomAreaAvailabilityChange: (isAvailable: Boolean) -> Unit,
@@ -74,14 +78,6 @@ private fun ToDos(
     val spacing = ToDoGroupDefaults.spacing
     val topAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors()
     val topAppBarScrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val ongoingToDoLoadable = remember(descriptionLoadable) {
-        descriptionLoadable.map(ToDosDescription::ongoingToDo)
-    }
-    val toDoGroupDescriptionsLoadable = remember(descriptionLoadable) {
-        descriptionLoadable.map { description ->
-            description.toDoGroups.serialize()
-        }
-    }
 
     DisposableEffect(isBottomAreaAvailable) {
         onBottomAreaAvailabilityChange(isBottomAreaAvailable)
@@ -123,8 +119,8 @@ private fun ToDos(
 
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.large * 2)) {
-                    if (toDoGroupDescriptionsLoadable is Loadable.Loaded) {
-                        toDoGroupDescriptionsLoadable.content.forEach {
+                    if (groupsLoadable is Loadable.Loaded) {
+                        groupsLoadable.content.forEach {
                             ToDoGroup(it, onToDoToggle)
                         }
                     } else {
@@ -144,7 +140,8 @@ private fun ToDos(
 private fun LoadedToDosPreview() {
     TickTheme {
         ToDos(
-            Loadable.Loaded(ToDosDescription.sample),
+            ongoingToDoLoadable = Loadable.Loaded(ToDo.sample),
+            groupsLoadable = Loadable.Loaded(ToDoGroup.samples.serialize()),
             onToDoToggle = { _, _ -> },
             onNavigationToComposer = { },
             onBottomAreaAvailabilityChange = { }
