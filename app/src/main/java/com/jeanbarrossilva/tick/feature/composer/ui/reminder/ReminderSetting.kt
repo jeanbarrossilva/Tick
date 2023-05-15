@@ -106,7 +106,13 @@ internal fun ReminderSetting(
         action = {
             Switch(
                 checked = isExpanded,
-                onCheckedChange = { onDueDateTimeChange(LocalDateTime.now()) },
+                onCheckedChange = { isChecked ->
+                    if (isChecked) {
+                        onDueDateTimeChange(LocalDateTime.now())
+                    } else {
+                        onDueDateTimeChange(null)
+                    }
+                },
                 colors = SwitchDefaults
                     .colors(uncheckedThumbColor = switchColor, uncheckedBorderColor = switchColor)
             )
