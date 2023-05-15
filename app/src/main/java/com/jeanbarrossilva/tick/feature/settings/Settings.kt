@@ -17,10 +17,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.tick.app.R
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.ramcosta.composedestinations.annotation.Destination
 
 internal const val SETTINGS_ROUTE = "settings"
 
 @Composable
+@Destination(SETTINGS_ROUTE)
 internal fun Settings(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val appName = stringResource(R.string.app_name)

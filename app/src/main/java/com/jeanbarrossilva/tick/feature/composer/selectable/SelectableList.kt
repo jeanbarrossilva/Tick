@@ -5,7 +5,7 @@ import java.io.Serializable
 @JvmInline
 internal value class SelectableList<T : Serializable>(
     private val elements: List<Selectable<T>>
-) : List<Selectable<T>> by elements {
+) : List<Selectable<T>> by elements, Serializable {
     val selected
         get() = first(Selectable<T>::isSelected).value
 

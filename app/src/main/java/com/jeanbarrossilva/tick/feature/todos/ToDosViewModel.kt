@@ -29,7 +29,7 @@ class ToDosViewModel internal constructor(
     internal val ongoingToDoLoadable = groupsLoadableFlow
         .innerMap { groups ->
             groups.flatMap(ToDoGroup::toDos).first { toDo ->
-                toDo.dueDateTime >= LocalDateTime.now()
+                toDo.dueDateTime != null && toDo.dueDateTime >= LocalDateTime.now()
             }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Loadable.Loading())

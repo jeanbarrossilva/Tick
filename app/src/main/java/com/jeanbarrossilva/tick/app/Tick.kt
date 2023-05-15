@@ -23,24 +23,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.jeanbarrossilva.tick.app.extensions.toDos
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.feature.composer.COMPOSER_ROUTE
-import com.jeanbarrossilva.tick.feature.composer.Composer
-import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
+import com.jeanbarrossilva.tick.app.extensions.composerDependencies
+import com.jeanbarrossilva.tick.app.extensions.toDosDependencies
+import com.jeanbarrossilva.tick.feature.NavGraphs
 import com.jeanbarrossilva.tick.feature.settings.SETTINGS_ROUTE
-import com.jeanbarrossilva.tick.feature.settings.Settings
 import com.jeanbarrossilva.tick.feature.todos.TO_DOS_ROUTE
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
+import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.navigation.dependency
+import com.ramcosta.composedestinations.rememberNavHostEngine
 
 @Composable
 internal fun Tick(modifier: Modifier = Modifier) {
-    val navController = rememberNavController()
+    val engine = rememberNavHostEngine()
+    val navController = engine.rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val route by remember(backStackEntry) {
         derivedStateOf {
@@ -51,6 +49,11 @@ internal fun Tick(modifier: Modifier = Modifier) {
     val bottomBarTonalElevation by animateDpAsState(
         if (isBottomAreaAvailable) BottomAppBarDefaults.ContainerElevation else 0.dp
     )
+    val onBottomAreaAvailabilityChangeListener = remember {
+        OnBottomAreaAvailabilityChangeListener {
+            isBottomAreaAvailable = it
+        }
+    }
 
     TickTheme {
         Scaffold(
@@ -77,30 +80,18 @@ internal fun Tick(modifier: Modifier = Modifier) {
                 .only(WindowInsetsSides.End)
                 .only(WindowInsetsSides.Bottom)
         ) { padding ->
-            NavHost(navController, startDestination = TO_DOS_ROUTE) {
-                toDos(
-                    navController,
-                    onBottomAreaAvailabilityChange = { isBottomAreaAvailable = it },
-                    Modifier.padding(padding)
-                )
+            DestinationsNavHost(
+                NavGraphs.root,
+                Modifier.padding(padding),
+                engine = engine,
+                navController = navController,
+                dependenciesContainerBuilder = {
+                    toDosDependencies()
+                    composerDependencies()
 
-                composable(COMPOSER_ROUTE) {
-                    Composer(
-                        ToDo.sample.title,
-                        ToDo.sample.dueDateTime,
-                        ToDoGroup.samples.map(ToDoGroup::title).selectFirst(),
-                        onBackwardsNavigation = navController::popBackStack,
-                        onTitleChange = { },
-                        onDueDateTimeChange = { },
-                        onNavigationToGroups = { },
-                        onDone = { }
-                    )
+                    dependency(onBottomAreaAvailabilityChangeListener)
                 }
-
-                composable(SETTINGS_ROUTE) {
-                    Settings()
-                }
-            }
+            )
         }
     }
 }

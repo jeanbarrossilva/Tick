@@ -2,6 +2,7 @@ import com.jeanbarrossilva.tick.Versions
 
 plugins {
     id("com.android.application")
+    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
     id("kotlin-android")
 }
 
@@ -44,12 +45,19 @@ android {
 }
 
 dependencies {
+    @Suppress("SpellCheckingInspection")
+    ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.COMPOSE_DESTINATIONS}")
+
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("com.jeanbarrossilva.loadable:loadable:1.4.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
+
+    @Suppress("SpellCheckingInspection")
+    implementation("io.github.raamcosta.compose-destinations:core:${Versions.COMPOSE_DESTINATIONS}")
+
     implementation("io.insert-koin:koin-androidx-compose:3.4.4")
 
     @Suppress("SpellCheckingInspection")

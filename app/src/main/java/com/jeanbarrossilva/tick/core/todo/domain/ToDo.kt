@@ -7,7 +7,7 @@ import java.util.UUID
 data class ToDo internal constructor(
     val id: UUID,
     val title: String,
-    val dueDateTime: LocalDateTime,
+    val dueDateTime: LocalDateTime?,
     val isDone: Boolean
 ) : Serializable {
     companion object {

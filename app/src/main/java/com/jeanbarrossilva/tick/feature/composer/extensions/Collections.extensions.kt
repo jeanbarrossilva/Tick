@@ -19,8 +19,7 @@ internal fun <T : Serializable> Collection<T>.selectFirst(): SelectableList<T> {
  * @param selection Predicate that determines whether the element that's been given to it is
  * selected.
  **/
-private fun <T : Serializable> Collection<T>.select(selection: (T) -> Boolean = { false }):
-    SelectableList<T> {
+private fun <T : Serializable> Collection<T>.select(selection: (T) -> Boolean): SelectableList<T> {
     val elements = map { Selectable(it, selection(it)) }
     return SelectableList(elements)
 }

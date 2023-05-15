@@ -22,9 +22,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jeanbarrossilva.loadable.Loadable
+import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.extensions.backwardsNavigationArrow
@@ -35,16 +40,44 @@ import com.jeanbarrossilva.tick.platform.setting.Setting
 import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.time.LocalDateTime
 
-const val COMPOSER_ROUTE = "composer"
+@Composable
+@Destination
+fun Composer(
+    navigator: DestinationsNavigator,
+    viewModel: ComposerViewModel,
+    modifier: Modifier = Modifier
+) {
+    val title by viewModel.titleFlow.collectAsState()
+    val dueDateTime by viewModel.dueDateTimeFlow.collectAsState()
+    val groupsLoadable by viewModel.groupsLoadableFlow.collectAsState()
+    val onBackwardsNavigation by rememberUpdatedState<() -> Unit> { navigator.popBackStack() }
+
+    Composer(
+        title,
+        dueDateTime,
+        groupsLoadable,
+        onBackwardsNavigation,
+        onTitleChange = viewModel::setTitle,
+        onDueDateTimeChange = viewModel::setDueDateTime,
+        onNavigationToGroups = { },
+        onDone = {
+            viewModel.save()
+            onBackwardsNavigation()
+        },
+        modifier
+    )
+}
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun Composer(
     title: String,
     dueDateTime: LocalDateTime?,
-    toDoGroupNames: SelectableList<String>,
+    groupsLoadable: Loadable<SelectableList<ToDoGroup>>,
     onBackwardsNavigation: () -> Unit,
     onTitleChange: (title: String) -> Unit,
     onDueDateTimeChange: (dueDate: LocalDateTime?) -> Unit,
@@ -98,7 +131,14 @@ internal fun Composer(
 
                 item {
                     Setting(
-                        text = { Text(toDoGroupNames.selected) },
+                        text = {
+                            Text(
+                                groupsLoadable
+                                    .ifLoaded(SelectableList<ToDoGroup>::selected)
+                                    ?.title
+                                    .orEmpty()
+                            )
+                        },
                         action = {
                             Icon(
                                 TickTheme.Icons.forwardsNavigationArrow,
@@ -122,7 +162,7 @@ private fun ComposerPreview() {
         Composer(
             ToDo.sample.title,
             ToDo.sample.dueDateTime,
-            ToDoGroup.samples.map(ToDoGroup::title).selectFirst(),
+            Loadable.Loaded(ToDoGroup.samples.selectFirst()),
             onBackwardsNavigation = { },
             onTitleChange = { },
             onDueDateTimeChange = { },
