@@ -1,6 +1,6 @@
 package com.jeanbarrossilva.tick.feature.todos.extensions
 
-import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ToDosDescription
 import java.time.LocalDateTime
 

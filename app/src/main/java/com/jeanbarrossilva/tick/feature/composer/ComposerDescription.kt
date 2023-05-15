@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.feature.composer
 
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
 import com.jeanbarrossilva.tick.feature.composer.selectable.SelectableList
 import java.io.Serializable

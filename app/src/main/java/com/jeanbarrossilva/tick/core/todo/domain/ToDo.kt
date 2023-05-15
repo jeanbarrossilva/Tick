@@ -19,3 +19,15 @@ data class ToDo internal constructor(
         )
     }
 }
+
+/**
+ * Gets the [ToDo] whose [ID][ToDo.id] equals to the given one.
+ *
+ * @param id [ID][ToDo.id] of the [ToDo] to be obtained.
+ **/
+@Suppress("KDocUnresolvedReference")
+internal operator fun Collection<ToDo>.get(id: UUID): ToDo? {
+    return find { toDo ->
+        toDo.id == id
+    }
+}

@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.feature.todos
 
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import java.io.Serializable
 
 internal data class ToDosDescription(
@@ -9,7 +9,6 @@ internal data class ToDosDescription(
     val toDoGroups: List<ToDoGroup>
 ) : Serializable {
     companion object {
-        val sample =
-            ToDosDescription(ToDo.sample, ToDoGroup.samples)
+        val sample = ToDosDescription(ToDo.sample, ToDoGroup.samples)
     }
 }

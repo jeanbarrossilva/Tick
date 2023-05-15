@@ -5,44 +5,43 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.jeanbarrossilva.loadable.flow.loadable
+import com.jeanbarrossilva.loadable.ifLoaded
+import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.loadable.map
-import com.jeanbarrossilva.tick.core.todo.domain.ToDoGroup
+import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.todo.domain.group.of
+import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoGroupRepository
-import com.jeanbarrossilva.tick.feature.todos.extensions.get
-import com.jeanbarrossilva.tick.feature.todos.extensions.replacing
-import com.jeanbarrossilva.tick.feature.todos.extensions.replacingBy
-import com.jeanbarrossilva.tick.feature.todos.extensions.toMutableStateFlow
 import com.jeanbarrossilva.tick.feature.todos.extensions.toToDosDescription
 import java.util.UUID
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
-class ToDosViewModel internal constructor(toDoGroupRepository: ToDoGroupRepository) :
-    ViewModel() {
-    internal val descriptionLoadableFlow = toDoGroupRepository
-        .fetch()
-        .map(List<ToDoGroup>::toToDosDescription)
-        .loadable(viewModelScope)
-        .toMutableStateFlow()
+class ToDosViewModel internal constructor(
+    repository: ToDoGroupRepository,
+    private val editor: ToDoEditor
+) : ViewModel() {
+    internal val descriptionLoadableFlow =
+        repository.fetch().map(List<ToDoGroup>::toToDosDescription).loadable(viewModelScope)
 
     internal fun toggle(toDoID: UUID, isDone: Boolean) {
-        descriptionLoadableFlow.value = descriptionLoadableFlow.value.map { description ->
-            val (toDoGroupDescription, toDo) =
-                requireNotNull(description.toDoGroups[toDoID])
-            val toggledToDos =
-                toDoGroupDescription.toDos.replacing(toDoID) { toDo.copy(isDone = isDone) }
-            val toggledToDoDescription = toDoGroupDescription.copy(toDos = toggledToDos)
-            val toggledToDoGroupDescriptions = description
-                .toDoGroups
-                .replacingBy({ toggledToDoDescription }, toDoGroupDescription::equals)
-            description.copy(toDoGroups = toggledToDoGroupDescriptions)
-        }
+        descriptionLoadableFlow
+            .value
+            .map { description -> description.toDoGroups.serialize() }
+            .ifLoaded {
+                viewModelScope.launch {
+                    val (group, _) = this@ifLoaded of toDoID
+                    editor.onGroup(group.id).onToDo(toDoID).setDone(isDone)
+                }
+            }
     }
 
     companion object {
-        fun createFactory(toDoGroupRepository: ToDoGroupRepository): ViewModelProvider.Factory {
+        fun createFactory(repository: ToDoGroupRepository, editor: ToDoEditor):
+            ViewModelProvider.Factory {
             return viewModelFactory {
                 addInitializer(ToDosViewModel::class) {
-                    ToDosViewModel(toDoGroupRepository)
+                    ToDosViewModel(repository, editor)
                 }
             }
         }
