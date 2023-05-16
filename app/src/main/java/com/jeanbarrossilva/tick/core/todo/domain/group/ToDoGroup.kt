@@ -6,8 +6,25 @@ import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class ToDoGroup internal constructor(val id: UUID, val title: String, val toDos: List<ToDo>) :
-    Serializable {
+data class ToDoGroup internal constructor(
+    val id: UUID,
+    val title: String,
+    private val toDos: List<ToDo>
+) : Comparable<ToDoGroup>, Serializable {
+    override fun compareTo(other: ToDoGroup): Int {
+        return if (toDos.isNotEmpty() && other.toDos.isEmpty()) {
+            1
+        } else if (toDos.isNotEmpty()) {
+            toDos.first().compareTo(other.toDos.first())
+        } else {
+            0
+        }
+    }
+
+    fun toDos(): List<ToDo> {
+        return toDos.sorted()
+    }
+
     companion object {
         val sample = ToDoGroup(
             UUID.randomUUID(),
@@ -71,7 +88,7 @@ infix fun Collection<ToDoGroup>.of(toDoID: UUID): Pair<ToDoGroup, ToDo> {
     }
 
     return associate { toDoGroupDescription ->
-        toDoGroupDescription to toDoGroupDescription.toDos[toDoID]
+        toDoGroupDescription to toDoGroupDescription.toDos()[toDoID]
     }
         .filterValues { toDo -> toDo != null }
         .entries

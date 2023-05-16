@@ -19,7 +19,7 @@ abstract class ToDoGroupScope {
     }
 
     suspend fun onToDo(id: UUID): ToDoScope {
-        val toDo = repository.fetch().first().getOrThrow(groupID).toDos[id]
+        val toDo = repository.fetch().first().getOrThrow(groupID).toDos()[id]
         assert(toDo != null) { "To-do $id not found in group $groupID." }
         return getToDoScope(id)
     }

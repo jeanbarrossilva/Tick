@@ -94,7 +94,7 @@ internal fun ToDoGroup(
             horizontalArrangement = Arrangement.spacedBy(TickTheme.sizes.large)
         ) {
             if (descriptionLoadable is Loadable.Loaded) {
-                items(descriptionLoadable.content.toDos) { toDo ->
+                items(descriptionLoadable.content.toDos()) { toDo ->
                     Card(toDo, onToggle = { isDone -> onToDoToggle(toDo, isDone) })
                 }
             } else {

@@ -16,7 +16,7 @@ class InMemoryToDoGroupScope(
     override suspend fun onAddToDo(toDo: ToDo) {
         val groups = repository.groupsFlow.value
         val group = groups.getOrThrow(groupID)
-        val toggledGroup = group.copy(toDos = group.toDos + toDo)
+        val toggledGroup = group.copy(toDos = group.toDos() + toDo)
         repository.groupsFlow.value = groups.replacingBy(toggledGroup)
     }
 

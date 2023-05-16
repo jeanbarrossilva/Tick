@@ -14,7 +14,7 @@ class InMemoryToDoScope(
         val groups = repository.groupsFlow.value
         val (group, toDo) = groups of id
         val toggledToDo = toDo.copy(isDone = isDone)
-        val toggledToDos = group.toDos.replacingBy(toggledToDo)
+        val toggledToDos = group.toDos().replacingBy(toggledToDo)
         val toggledGroup = group.copy(toDos = toggledToDos)
         repository.groupsFlow.value = groups.replacingBy(toggledGroup)
     }

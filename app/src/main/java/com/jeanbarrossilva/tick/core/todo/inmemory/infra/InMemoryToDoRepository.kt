@@ -5,10 +5,10 @@ import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class InMemoryToDoRepository : ToDoRepository {
+class InMemoryToDoRepository : ToDoRepository() {
     internal val groupsFlow = MutableStateFlow(ToDoGroup.samples)
 
-    override fun fetch(): Flow<List<ToDoGroup>> {
+    override fun onFetch(): Flow<List<ToDoGroup>> {
         return groupsFlow
     }
 }

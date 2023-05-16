@@ -9,7 +9,15 @@ data class ToDo internal constructor(
     val title: String,
     val dueDateTime: LocalDateTime?,
     val isDone: Boolean
-) : Serializable {
+) : Comparable<ToDo>, Serializable {
+    override fun compareTo(other: ToDo): Int {
+        return if (dueDateTime != null && other.dueDateTime == null) {
+            1
+        } else {
+            dueDateTime?.compareTo(other.dueDateTime) ?: -1
+        }
+    }
+
     companion object {
         val sample = ToDo(
             UUID.randomUUID(),
