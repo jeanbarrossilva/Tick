@@ -56,6 +56,11 @@ dependencies {
     implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
 
     @Suppress("SpellCheckingInspection")
+    implementation(
+        "io.github.raamcosta.compose-destinations:animations-core:${Versions.COMPOSE_DESTINATIONS}"
+    )
+
+    @Suppress("SpellCheckingInspection")
     implementation("io.github.raamcosta.compose-destinations:core:${Versions.COMPOSE_DESTINATIONS}")
 
     implementation("io.insert-koin:koin-androidx-compose:3.4.4")
