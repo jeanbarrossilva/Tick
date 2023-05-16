@@ -17,7 +17,7 @@ import com.ramcosta.composedestinations.result.ResultRecipient
 import org.koin.compose.koinInject
 
 @Composable
-@Destination
+@Destination(route = "to-dos/composer")
 internal fun Composer(
     navigator: DestinationsNavigator,
     groupsResultRecipient: ResultRecipient<GroupsDestination, ToDoGroup>,

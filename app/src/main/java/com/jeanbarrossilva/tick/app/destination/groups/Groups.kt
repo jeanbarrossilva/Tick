@@ -12,7 +12,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.result.ResultBackNavigator
 
 @Composable
-@Destination
+@Destination(route = "to-dos/composer/groups")
 internal fun Groups(
     resultBackNavigator: ResultBackNavigator<ToDoGroup>,
     argument: GroupsArgument

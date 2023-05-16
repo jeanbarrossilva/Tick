@@ -14,10 +14,8 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.compose.koinInject
 
-internal const val TO_DOS_ROUTE = "to-dos"
-
 @Composable
-@Destination(TO_DOS_ROUTE)
+@Destination
 @RootNavGraph(start = true)
 internal fun ToDos(
     navigator: DestinationsNavigator,
