@@ -40,7 +40,7 @@ fun SettingGroup(
 ) {
     val scope = remember(::SettingGroupScope)
 
-    DisposableEffect(Unit) {
+    DisposableEffect(text as Any?, action as Any?, isExpanded, modifier, content, scope.metadata) {
         scope.content()
         onDispose { }
     }
@@ -85,6 +85,7 @@ private fun SettingGroupPreview() {
         ) {
             repeat(4) { index ->
                 setting(
+                    id = "$index",
                     text = { Text("#$index") },
                     action = {
                         Icon(

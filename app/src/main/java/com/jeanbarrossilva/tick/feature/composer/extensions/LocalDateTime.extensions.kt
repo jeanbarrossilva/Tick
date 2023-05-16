@@ -1,23 +1,34 @@
 package com.jeanbarrossilva.tick.feature.composer.extensions
 
+import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.Month
+import java.time.LocalTime
+import java.time.ZoneId
 
 /**
  * Copies the given [LocalDateTime].
  *
- * @param year Value of [LocalDateTime.getYear].
- * @param month Value of [LocalDateTime.getMonth].
- * @param dayOfMonth Value of [LocalDateTime.getDayOfMonth].
- * @param hour Value of [LocalDateTime.getHour].
- * @param minute Value of [LocalDateTime.getMinute].
+ * @param date Defines the [year][LocalDateTime.getYear], the [month][LocalDateTime.getMonth] and
+ * the [day-of-month][LocalDateTime.getDayOfMonth].
+ * @param time Defines the [hour][LocalDateTime.getHour], the [minute][LocalDateTime.getMinute], the
+ * [second][LocalDateTime.getSecond] and the [nano][LocalDateTime.getNano].
  **/
-internal fun LocalDateTime.copy(
-    year: Int = getYear(),
-    month: Month = getMonth(),
-    dayOfMonth: Int = getDayOfMonth(),
-    hour: Int = getHour(),
-    minute: Int = getMinute()
-): LocalDateTime {
-    return LocalDateTime.of(year, month, dayOfMonth, hour, minute)
+internal fun LocalDateTime.copy(date: LocalDate = toLocalDate(), time: LocalTime = toLocalTime()):
+    LocalDateTime {
+    return withYear(date.year)
+        .withMonth(date.monthValue)
+        .withDayOfMonth(date.dayOfMonth)
+        .withHour(time.hour)
+        .withMinute(time.minute)
+        .withSecond(time.second)
+        .withNano(time.nano)
+}
+
+/**
+ * Converts this [LocalDateTime] into to the number of milliseconds from the epoch of
+ * 1970-01-01T00:00:00Z.
+ **/
+internal fun LocalDateTime.toEpochMilli(): Long {
+    val zoneId = ZoneId.systemDefault()
+    return atZone(zoneId).toInstant().toEpochMilli()
 }

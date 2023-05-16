@@ -19,11 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.feature.composer.extensions.copy
+import com.jeanbarrossilva.tick.feature.composer.extensions.toEpochMilli
+import com.jeanbarrossilva.tick.platform.setting.extensions.selectedDate
+import com.jeanbarrossilva.tick.platform.setting.extensions.time
 import com.jeanbarrossilva.tick.platform.setting.group.SettingGroup
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
-import java.time.Instant
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -34,25 +35,18 @@ internal fun ReminderSetting(
     onDueDateTimeChange: (dueDateTime: LocalDateTime?) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val zoneId = ZoneId.systemDefault()
     val isExpanded = remember(dueDateTime) { dueDateTime != null }
     val switchColor = TickTheme.colorScheme.surfaceTint
+    var lastDueDateTime by remember { mutableStateOf(dueDateTime) }
     var isDatePickerVisible by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = dueDateTime?.atZone(zoneId)?.toInstant()?.toEpochMilli(),
-        initialDisplayedMonthMillis = dueDateTime?.atZone(zoneId)?.toInstant()?.toEpochMilli()
-    )
-    val formattedDate = remember(dueDateTime) {
-        dueDateTime?.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)).orEmpty()
-    }
+    val datePickerState =
+        rememberDatePickerState(initialSelectedDateMillis = dueDateTime?.toEpochMilli())
+    val dateFormatter = remember { DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM) }
+    val formattedDate = remember(dueDateTime) { dueDateTime?.format(dateFormatter).orEmpty() }
     var isTimePickerVisible by remember { mutableStateOf(false) }
-    val timePickerState = rememberTimePickerState(
-        dueDateTime?.hour ?: LocalDateTime.now().hour,
-        dueDateTime?.minute ?: LocalDateTime.now().minute
-    )
-    val formattedTime = remember(dueDateTime) {
-        dueDateTime?.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)).orEmpty()
-    }
+    val timePickerState = rememberTimePickerState(dueDateTime?.hour ?: 0, dueDateTime?.minute ?: 0)
+    val timeFormatter = remember { DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT) }
+    val formattedTime = remember(dueDateTime) { dueDateTime?.format(timeFormatter).orEmpty() }
 
     if (isDatePickerVisible) {
         DatePickerDialog(
@@ -60,16 +54,8 @@ internal fun ReminderSetting(
             confirmButton = {
                 ConfirmationButton(
                     onClick = {
-                        datePickerState.selectedDateMillis?.let {
-                            val selectedInstant = Instant.ofEpochMilli(it)
-                            val selectedDate = LocalDateTime.ofInstant(selectedInstant, zoneId)
-                            onDueDateTimeChange(
-                                dueDateTime?.copy(
-                                    year = selectedDate.year,
-                                    month = selectedDate.month,
-                                    dayOfMonth = selectedDate.dayOfMonth
-                                )
-                            )
+                        datePickerState.selectedDate?.let {
+                            onDueDateTimeChange(dueDateTime?.copy(date = it))
                         }
                         isDatePickerVisible = false
                     }
@@ -86,12 +72,7 @@ internal fun ReminderSetting(
             confirmationButton = {
                 ConfirmationButton(
                     onClick = {
-                        onDueDateTimeChange(
-                            dueDateTime?.copy(
-                                hour = timePickerState.hour,
-                                minute = timePickerState.minute
-                            )
-                        )
+                        onDueDateTimeChange(dueDateTime?.copy(time = timePickerState.time))
                         isTimePickerVisible = false
                     }
                 )
@@ -108,8 +89,9 @@ internal fun ReminderSetting(
                 checked = isExpanded,
                 onCheckedChange = { isChecked ->
                     if (isChecked) {
-                        onDueDateTimeChange(LocalDateTime.now())
+                        onDueDateTimeChange(lastDueDateTime ?: LocalDateTime.now())
                     } else {
+                        lastDueDateTime = dueDateTime
                         onDueDateTimeChange(null)
                     }
                 },
@@ -121,12 +103,14 @@ internal fun ReminderSetting(
         modifier
     ) {
         setting(
+            id = "date",
             text = { Text("Date") },
             action = { Text(formattedDate) },
             onClick = { isDatePickerVisible = true }
         )
 
         setting(
+            id = "time",
             text = { Text("Time") },
             action = { Text(formattedTime) },
             onClick = { isTimePickerVisible = true }
