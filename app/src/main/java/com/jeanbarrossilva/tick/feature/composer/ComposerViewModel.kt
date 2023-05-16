@@ -4,12 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.flow.loadable
 import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
-import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
+import com.jeanbarrossilva.tick.feature.composer.extensions.mutableStateIn
+import com.jeanbarrossilva.tick.std.select
+import com.jeanbarrossilva.tick.std.selectFirst
 import java.time.LocalDateTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,8 +26,11 @@ class ComposerViewModel internal constructor(
     private val titleMutableFlow = MutableStateFlow("")
     private val dueDateTimeMutableFlow = MutableStateFlow<LocalDateTime?>(null)
 
-    internal val groupsLoadableFlow =
-        repository.fetch().map(List<ToDoGroup>::selectFirst).loadable(viewModelScope)
+    internal val groupsLoadableFlow = repository
+        .fetch()
+        .map(List<ToDoGroup>::selectFirst)
+        .loadable(viewModelScope)
+        .mutableStateIn(viewModelScope)
     internal val titleFlow = titleMutableFlow.asStateFlow()
     internal val dueDateTimeFlow = dueDateTimeMutableFlow.asStateFlow()
 
@@ -34,6 +40,12 @@ class ComposerViewModel internal constructor(
 
     internal fun setDueDateTime(dueDateTime: LocalDateTime?) {
         dueDateTimeMutableFlow.value = dueDateTime
+    }
+
+    internal fun setGroup(group: ToDoGroup) {
+        groupsLoadableFlow.value.ifLoaded {
+            groupsLoadableFlow.value = Loadable.Loaded(select(group))
+        }
     }
 
     internal fun save() {

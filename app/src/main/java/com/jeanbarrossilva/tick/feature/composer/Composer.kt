@@ -24,7 +24,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,28 +32,25 @@ import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.extensions.backwardsNavigationArrow
-import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
-import com.jeanbarrossilva.tick.feature.composer.selectable.SelectableList
 import com.jeanbarrossilva.tick.feature.composer.ui.reminder.ReminderSetting
 import com.jeanbarrossilva.tick.platform.setting.Setting
 import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.jeanbarrossilva.tick.std.SelectableList
+import com.jeanbarrossilva.tick.std.selectFirst
 import java.time.LocalDateTime
 
 @Composable
-@Destination
 fun Composer(
-    navigator: DestinationsNavigator,
     viewModel: ComposerViewModel,
+    onBackwardsNavigation: () -> Unit,
+    onNavigationToGroups: (groups: SelectableList<ToDoGroup>) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val title by viewModel.titleFlow.collectAsState()
     val dueDateTime by viewModel.dueDateTimeFlow.collectAsState()
     val groupsLoadable by viewModel.groupsLoadableFlow.collectAsState()
-    val onBackwardsNavigation by rememberUpdatedState<() -> Unit> { navigator.popBackStack() }
 
     Composer(
         title,
@@ -63,7 +59,7 @@ fun Composer(
         onBackwardsNavigation,
         onTitleChange = viewModel::setTitle,
         onDueDateTimeChange = viewModel::setDueDateTime,
-        onNavigationToGroups = { },
+        onNavigationToGroups,
         onDone = {
             viewModel.save()
             onBackwardsNavigation()
@@ -81,7 +77,7 @@ internal fun Composer(
     onBackwardsNavigation: () -> Unit,
     onTitleChange: (title: String) -> Unit,
     onDueDateTimeChange: (dueDate: LocalDateTime?) -> Unit,
-    onNavigationToGroups: () -> Unit,
+    onNavigationToGroups: (groups: SelectableList<ToDoGroup>) -> Unit,
     onDone: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -145,7 +141,7 @@ internal fun Composer(
                                 contentDescription = "Change group"
                             )
                         },
-                        onClick = onNavigationToGroups,
+                        onClick = { groupsLoadable.ifLoaded(onNavigationToGroups) },
                         label = { Text("Group") }
                     )
                 }

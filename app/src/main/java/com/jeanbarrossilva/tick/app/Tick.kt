@@ -16,21 +16,16 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.jeanbarrossilva.tick.app.extensions.composerDependencies
-import com.jeanbarrossilva.tick.app.extensions.toDosDependencies
-import com.jeanbarrossilva.tick.feature.NavGraphs
-import com.jeanbarrossilva.tick.feature.settings.SETTINGS_ROUTE
-import com.jeanbarrossilva.tick.feature.todos.TO_DOS_ROUTE
+import com.jeanbarrossilva.tick.app.destination.NavGraphs
+import com.jeanbarrossilva.tick.app.destination.SETTINGS_ROUTE
+import com.jeanbarrossilva.tick.app.destination.TO_DOS_ROUTE
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
-import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.rememberNavHostEngine
@@ -45,15 +40,15 @@ internal fun Tick(modifier: Modifier = Modifier) {
             backStackEntry?.destination?.route
         }
     }
-    var isBottomAreaAvailable by remember { mutableStateOf(false) }
+    val onBottomAreaAvailabilityChangeListener =
+        remember(::TickOnBottomAreaAvailabilityChangeListener)
     val bottomBarTonalElevation by animateDpAsState(
-        if (isBottomAreaAvailable) BottomAppBarDefaults.ContainerElevation else 0.dp
-    )
-    val onBottomAreaAvailabilityChangeListener = remember {
-        OnBottomAreaAvailabilityChangeListener {
-            isBottomAreaAvailable = it
+        if (onBottomAreaAvailabilityChangeListener.isAvailable) {
+            BottomAppBarDefaults.ContainerElevation
+        } else {
+            0.dp
         }
-    }
+    )
 
     TickTheme {
         Scaffold(
@@ -86,9 +81,6 @@ internal fun Tick(modifier: Modifier = Modifier) {
                 engine = engine,
                 navController = navController,
                 dependenciesContainerBuilder = {
-                    toDosDependencies()
-                    composerDependencies()
-
                     dependency(onBottomAreaAvailabilityChangeListener)
                 }
             )

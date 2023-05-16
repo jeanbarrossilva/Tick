@@ -31,25 +31,17 @@ import com.jeanbarrossilva.loadable.list.SerializableList
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.feature.destinations.ComposerDestination
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
 import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-
-internal const val TO_DOS_ROUTE = "to-dos"
 
 @Composable
-@Destination(TO_DOS_ROUTE)
-@RootNavGraph(start = true)
 fun ToDos(
-    navigator: DestinationsNavigator,
     viewModel: ToDosViewModel,
+    onNavigationToComposer: () -> Unit,
     onBottomAreaAvailabilityChangeListener: OnBottomAreaAvailabilityChangeListener,
     modifier: Modifier = Modifier
 ) {
@@ -60,7 +52,7 @@ fun ToDos(
         ongoingToDoLoadable,
         groupsLoadable,
         onToDoToggle = { toDo, isDone -> viewModel.toggle(toDo.id, isDone) },
-        onNavigationToComposer = { navigator.navigate(ComposerDestination) },
+        onNavigationToComposer,
         onBottomAreaAvailabilityChangeListener,
         modifier
     )
@@ -68,7 +60,7 @@ fun ToDos(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun ToDos(
+internal fun ToDos(
     ongoingToDoLoadable: Loadable<ToDo>,
     groupsLoadable: Loadable<SerializableList<ToDoGroup>>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
@@ -152,7 +144,7 @@ private fun LoadedToDosPreview() {
             groupsLoadable = Loadable.Loaded(ToDoGroup.samples.serialize()),
             onToDoToggle = { _, _ -> },
             onNavigationToComposer = { },
-            onBottomAreaAvailabilityChangeListener = { }
+            OnBottomAreaAvailabilityChangeListener.empty
         )
     }
 }
