@@ -3,13 +3,13 @@ package com.jeanbarrossilva.tick.core.todo.domain.group
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.ToDoScope
 import com.jeanbarrossilva.tick.core.todo.domain.get
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoGroupRepository
+import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import java.time.LocalDateTime
 import java.util.UUID
 import kotlinx.coroutines.flow.first
 
 abstract class ToDoGroupScope {
-    protected abstract val repository: ToDoGroupRepository
+    protected abstract val repository: ToDoRepository
     protected abstract val groupID: UUID
 
     suspend fun addToDo(title: String, dueDateTime: LocalDateTime?) {

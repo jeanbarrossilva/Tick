@@ -6,7 +6,7 @@ import java.util.UUID
 import kotlinx.coroutines.flow.first
 
 abstract class ToDoEditor {
-    protected abstract val repository: ToDoGroupRepository
+    protected abstract val repository: ToDoRepository
 
     suspend fun onGroup(id: UUID): ToDoGroupScope {
         val group = repository.fetch().first()[id]

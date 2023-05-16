@@ -5,12 +5,12 @@ import com.jeanbarrossilva.tick.core.todo.domain.ToDoScope
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroupScope
 import com.jeanbarrossilva.tick.core.todo.domain.group.getOrThrow
 import com.jeanbarrossilva.tick.core.todo.inmemory.extensions.replacingBy
-import com.jeanbarrossilva.tick.core.todo.inmemory.infra.InMemoryToDoGroupRepository
+import com.jeanbarrossilva.tick.core.todo.inmemory.infra.InMemoryToDoRepository
 import com.jeanbarrossilva.tick.core.todo.inmemory.infra.domain.InMemoryToDoScope
 import java.util.UUID
 
 class InMemoryToDoGroupScope(
-    override val repository: InMemoryToDoGroupRepository,
+    override val repository: InMemoryToDoRepository,
     override val groupID: UUID
 ) : ToDoGroupScope() {
     override suspend fun onAddToDo(toDo: ToDo) {

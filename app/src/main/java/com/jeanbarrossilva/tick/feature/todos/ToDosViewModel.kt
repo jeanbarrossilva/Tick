@@ -12,7 +12,7 @@ import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.domain.group.of
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoGroupRepository
+import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import java.time.LocalDateTime
 import java.util.UUID
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class ToDosViewModel internal constructor(
-    repository: ToDoGroupRepository,
+    repository: ToDoRepository,
     private val editor: ToDoEditor
 ) : ViewModel() {
     internal val groupsLoadableFlow =
@@ -44,7 +44,7 @@ class ToDosViewModel internal constructor(
     }
 
     companion object {
-        fun createFactory(repository: ToDoGroupRepository, editor: ToDoEditor):
+        fun createFactory(repository: ToDoRepository, editor: ToDoEditor):
             ViewModelProvider.Factory {
             return viewModelFactory {
                 addInitializer(ToDosViewModel::class) {

@@ -8,7 +8,7 @@ import com.jeanbarrossilva.loadable.flow.loadable
 import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoGroupRepository
+import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.composer.extensions.selectFirst
 import java.time.LocalDateTime
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class ComposerViewModel internal constructor(
-    repository: ToDoGroupRepository,
+    repository: ToDoRepository,
     private val editor: ToDoEditor
 ) : ViewModel() {
     private val titleMutableFlow = MutableStateFlow("")
@@ -45,7 +45,7 @@ class ComposerViewModel internal constructor(
     }
 
     companion object {
-        fun createFactory(repository: ToDoGroupRepository, editor: ToDoEditor):
+        fun createFactory(repository: ToDoRepository, editor: ToDoEditor):
             ViewModelProvider.Factory {
             return viewModelFactory {
                 addInitializer(ComposerViewModel::class) {
