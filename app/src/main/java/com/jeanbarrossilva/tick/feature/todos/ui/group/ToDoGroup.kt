@@ -25,7 +25,7 @@ import com.jeanbarrossilva.tick.feature.todos.extensions.`if`
 import com.jeanbarrossilva.tick.feature.todos.extensions.placeholder
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
-object ToDoGroupDefaults {
+internal object ToDoGroupDefaults {
     val spacing
         @Composable get() = TickTheme.sizes.large
 }
