@@ -13,6 +13,7 @@ import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.domain.group.of
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.feature.todos.extensions.filterNotEmpty
 import java.time.LocalDateTime
 import java.util.UUID
 import kotlinx.coroutines.flow.SharingStarted
@@ -24,8 +25,11 @@ class ToDosViewModel internal constructor(
     repository: ToDoRepository,
     private val editor: ToDoEditor
 ) : ViewModel() {
-    internal val groupsLoadableFlow =
-        repository.fetch().map(List<ToDoGroup>::serialize).loadable(viewModelScope)
+    internal val groupsLoadableFlow = repository
+        .fetch()
+        .map(List<ToDoGroup>::filterNotEmpty)
+        .map(List<ToDoGroup>::serialize)
+        .loadable(viewModelScope)
     internal val ongoingToDoLoadable = groupsLoadableFlow
         .innerMap { groups ->
             groups.flatMap(ToDoGroup::toDos).find { toDo ->
