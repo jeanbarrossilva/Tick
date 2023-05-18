@@ -45,6 +45,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.spec.DestinationStyleBottomSheet
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
 @Composable
@@ -78,7 +79,7 @@ internal fun Tick(modifier: Modifier = Modifier) {
     val destination by navController.currentDestinationAsState()
     val isAtTop = remember(destination) {
         val route = destination?.route
-        route == null || '/' !in route
+        route == null || '/' !in route || destination?.style is DestinationStyleBottomSheet
     }
     val onBottomAreaAvailabilityChangeListener =
         remember(::TickOnBottomAreaAvailabilityChangeListener)
