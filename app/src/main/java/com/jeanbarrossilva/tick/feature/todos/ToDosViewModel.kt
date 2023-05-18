@@ -28,7 +28,7 @@ class ToDosViewModel internal constructor(
         repository.fetch().map(List<ToDoGroup>::serialize).loadable(viewModelScope)
     internal val ongoingToDoLoadable = groupsLoadableFlow
         .innerMap { groups ->
-            groups.flatMap(ToDoGroup::toDos).first { toDo ->
+            groups.flatMap(ToDoGroup::toDos).find { toDo ->
                 toDo.dueDateTime != null && toDo.dueDateTime >= LocalDateTime.now()
             }
         }

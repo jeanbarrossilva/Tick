@@ -4,7 +4,7 @@ import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class ToDo internal constructor(
+data class ToDo(
     val id: UUID,
     val title: String,
     val dueDateTime: LocalDateTime?,
@@ -14,7 +14,7 @@ data class ToDo internal constructor(
         return if (dueDateTime != null && other.dueDateTime == null) {
             1
         } else {
-            dueDateTime?.compareTo(other.dueDateTime) ?: -1
+            dueDateTime?.compareTo(other.dueDateTime) ?: title.compareTo(other.title)
         }
     }
 

@@ -26,7 +26,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.loadable.Loadable
-import com.jeanbarrossilva.loadable.ifLoaded
+import com.jeanbarrossilva.loadable.contentOrNull
 import com.jeanbarrossilva.loadable.list.SerializableList
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
@@ -61,7 +61,7 @@ fun ToDos(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ToDos(
-    ongoingToDoLoadable: Loadable<ToDo>,
+    ongoingToDoLoadable: Loadable<ToDo?>,
     groupsLoadable: Loadable<SerializableList<ToDoGroup>>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
     onNavigationToComposer: () -> Unit,
@@ -109,8 +109,8 @@ internal fun ToDos(
                 OngoingCard(
                     ongoingToDoLoadable,
                     onDoneToggle = { isDone ->
-                        ongoingToDoLoadable.ifLoaded {
-                            onToDoToggle(this, isDone)
+                        ongoingToDoLoadable.contentOrNull?.let { toDo ->
+                            onToDoToggle(toDo, isDone)
                         }
                     },
                     Modifier.padding(horizontal = spacing)

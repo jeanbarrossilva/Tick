@@ -12,10 +12,11 @@ abstract class ToDoGroupScope {
     protected abstract val repository: ToDoRepository
     protected abstract val groupID: UUID
 
-    suspend fun addToDo(title: String, dueDateTime: LocalDateTime?) {
+    suspend fun addToDo(title: String, dueDateTime: LocalDateTime?): UUID {
         val id = UUID.randomUUID()
         val toDo = ToDo(id, title, dueDateTime, isDone = false)
         onAddToDo(toDo)
+        return id
     }
 
     suspend fun onToDo(id: UUID): ToDoScope {
