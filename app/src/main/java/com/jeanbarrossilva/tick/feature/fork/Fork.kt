@@ -12,7 +12,7 @@ import com.jeanbarrossilva.tick.feature.fork.ui.option.group.OptionGroup
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
 @Composable
-internal fun Fork(
+fun Fork(
     onNavigationToToDoComposer: () -> Unit,
     onNavigationToGroupComposer: () -> Unit,
     modifier: Modifier = Modifier
