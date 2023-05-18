@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.app.destination
+package com.jeanbarrossilva.tick.app.destination.todos.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

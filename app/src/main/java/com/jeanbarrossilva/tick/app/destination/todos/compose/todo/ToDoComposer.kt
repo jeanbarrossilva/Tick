@@ -1,10 +1,10 @@
-package com.jeanbarrossilva.tick.app.destination
+package com.jeanbarrossilva.tick.app.destination.todos.compose.todo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jeanbarrossilva.tick.app.destination.destinations.GroupsDestination
-import com.jeanbarrossilva.tick.app.destination.groups.GroupsArgument
+import com.jeanbarrossilva.tick.app.destination.todos.compose.todo.groups.GroupsArgument
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
