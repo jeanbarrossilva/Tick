@@ -5,15 +5,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.jeanbarrossilva.loadable.Loadable
-import com.jeanbarrossilva.loadable.flow.innerMap
-import com.jeanbarrossilva.loadable.flow.loadable
-import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.domain.group.of
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.extensions.filterNotEmpty
+import com.jeanbarrossilva.tick.std.loadable.ifPopulated
+import com.jeanbarrossilva.tick.std.loadable.innerMap
+import com.jeanbarrossilva.tick.std.loadable.listLoadable
 import java.time.LocalDateTime
 import java.util.UUID
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,12 +25,12 @@ class ToDosViewModel internal constructor(
     repository: ToDoRepository,
     private val editor: ToDoEditor
 ) : ViewModel() {
-    internal val groupsLoadableFlow = repository
+    internal val groupsListLoadableFlow = repository
         .fetch()
         .map(List<ToDoGroup>::filterNotEmpty)
         .map(List<ToDoGroup>::serialize)
-        .loadable(viewModelScope)
-    internal val ongoingToDoLoadable = groupsLoadableFlow
+        .listLoadable(viewModelScope)
+    internal val ongoingToDoLoadable = groupsListLoadableFlow
         .innerMap { groups ->
             groups.flatMap(ToDoGroup::toDos).find { toDo ->
                 toDo.dueDateTime != null && toDo.dueDateTime >= LocalDateTime.now()
@@ -39,9 +39,9 @@ class ToDosViewModel internal constructor(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Loadable.Loading())
 
     internal fun toggle(toDoID: UUID, isDone: Boolean) {
-        groupsLoadableFlow.value.ifLoaded {
+        groupsListLoadableFlow.value.ifPopulated {
             viewModelScope.launch {
-                val (group, _) = this@ifLoaded of toDoID
+                val (group, _) = this@ifPopulated of toDoID
                 editor.onGroup(group.id).onToDo(toDoID).setDone(isDone)
             }
         }

@@ -27,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.contentOrNull
-import com.jeanbarrossilva.loadable.list.SerializableList
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
@@ -37,6 +36,7 @@ import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
+import com.jeanbarrossilva.tick.std.loadable.ListLoadable
 
 @Composable
 fun ToDos(
@@ -46,7 +46,7 @@ fun ToDos(
     modifier: Modifier = Modifier
 ) {
     val ongoingToDoLoadable by viewModel.ongoingToDoLoadable.collectAsState()
-    val groupsLoadable by viewModel.groupsLoadableFlow.collectAsState()
+    val groupsLoadable by viewModel.groupsListLoadableFlow.collectAsState()
 
     ToDos(
         ongoingToDoLoadable,
@@ -62,7 +62,7 @@ fun ToDos(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ToDos(
     ongoingToDoLoadable: Loadable<ToDo?>,
-    groupsLoadable: Loadable<SerializableList<ToDoGroup>>,
+    groupsListLoadable: ListLoadable<ToDoGroup>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
     onNavigationToComposer: () -> Unit,
     onBottomAreaAvailabilityChangeListener: OnBottomAreaAvailabilityChangeListener,
@@ -119,14 +119,18 @@ internal fun ToDos(
 
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.large * 2)) {
-                    if (groupsLoadable is Loadable.Loaded) {
-                        groupsLoadable.content.forEach {
-                            ToDoGroup(it, onToDoToggle)
+                    when (groupsListLoadable) {
+                        is ListLoadable.Loading -> {
+                            repeat(24) {
+                                ToDoGroup(Loadable.Loading(), onToDoToggle = { _, _ -> })
+                            }
                         }
-                    } else {
-                        repeat(24) {
-                            ToDoGroup(Loadable.Loading(), onToDoToggle = { _, _ -> })
+                        is ListLoadable.Populated -> {
+                            groupsListLoadable.content.forEach {
+                                ToDoGroup(it, onToDoToggle)
+                            }
                         }
+                        else -> { }
                     }
                 }
             }
@@ -141,7 +145,7 @@ private fun LoadedToDosPreview() {
     TickTheme {
         ToDos(
             ongoingToDoLoadable = Loadable.Loaded(ToDo.sample),
-            groupsLoadable = Loadable.Loaded(ToDoGroup.samples.serialize()),
+            groupsListLoadable = ListLoadable.Populated(ToDoGroup.samples.serialize()),
             onToDoToggle = { _, _ -> },
             onNavigationToComposer = { },
             OnBottomAreaAvailabilityChangeListener.empty
