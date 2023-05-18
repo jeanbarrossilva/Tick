@@ -11,8 +11,8 @@ import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.mutableStateIn
-import com.jeanbarrossilva.tick.std.select
-import com.jeanbarrossilva.tick.std.selectFirst
+import com.jeanbarrossilva.tick.std.selectable.select
+import com.jeanbarrossilva.tick.std.selectable.selectFirst
 import java.time.LocalDateTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

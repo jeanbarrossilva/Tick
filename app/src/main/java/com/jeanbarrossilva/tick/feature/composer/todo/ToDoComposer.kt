@@ -42,8 +42,8 @@ import com.jeanbarrossilva.tick.platform.setting.Setting
 import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
-import com.jeanbarrossilva.tick.std.SelectableList
-import com.jeanbarrossilva.tick.std.selectFirst
+import com.jeanbarrossilva.tick.std.selectable.SelectableList
+import com.jeanbarrossilva.tick.std.selectable.selectFirst
 import java.time.LocalDateTime
 
 @Composable

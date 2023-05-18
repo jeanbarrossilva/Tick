@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.std.SelectableList
-import com.jeanbarrossilva.tick.std.select
+import com.jeanbarrossilva.tick.std.selectable.SelectableList
+import com.jeanbarrossilva.tick.std.selectable.select
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow

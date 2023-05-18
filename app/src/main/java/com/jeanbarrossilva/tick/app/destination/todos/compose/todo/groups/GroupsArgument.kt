@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.app.destination.todos.compose.todo.groups
 
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.std.SelectableList
+import com.jeanbarrossilva.tick.std.selectable.SelectableList
 import java.io.Serializable
 
 /*

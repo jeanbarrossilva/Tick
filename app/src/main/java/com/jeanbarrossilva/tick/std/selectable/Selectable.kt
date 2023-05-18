@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.std
+package com.jeanbarrossilva.tick.std.selectable
 
 import java.io.Serializable
 
