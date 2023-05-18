@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.composer.extensions
+package com.jeanbarrossilva.tick.feature.composer.todo.extensions
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft

@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.composer.ui.reminder
+package com.jeanbarrossilva.tick.feature.composer.todo.ui.reminder
 
 import android.content.res.Configuration
 import androidx.compose.material3.DatePicker
@@ -18,8 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.feature.composer.extensions.copy
-import com.jeanbarrossilva.tick.feature.composer.extensions.toEpochMilli
+import com.jeanbarrossilva.tick.feature.composer.todo.extensions.copy
+import com.jeanbarrossilva.tick.feature.composer.todo.extensions.toEpochMilli
 import com.jeanbarrossilva.tick.platform.setting.extensions.selectedDate
 import com.jeanbarrossilva.tick.platform.setting.extensions.time
 import com.jeanbarrossilva.tick.platform.setting.group.SettingGroup

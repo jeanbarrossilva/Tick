@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.composer.extensions
+package com.jeanbarrossilva.tick.feature.composer.todo.extensions
 
 import com.jeanbarrossilva.loadable.Loadable
 import java.io.Serializable

@@ -25,7 +25,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.feature.composer.extensions.backwardsNavigationArrow
+import com.jeanbarrossilva.tick.feature.composer.todo.extensions.backwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 import com.jeanbarrossilva.tick.std.SelectableList

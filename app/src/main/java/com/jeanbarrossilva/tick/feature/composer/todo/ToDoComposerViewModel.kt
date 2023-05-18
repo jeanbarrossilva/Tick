@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.composer
+package com.jeanbarrossilva.tick.feature.composer.todo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +10,7 @@ import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
-import com.jeanbarrossilva.tick.feature.composer.extensions.mutableStateIn
+import com.jeanbarrossilva.tick.feature.composer.todo.extensions.mutableStateIn
 import com.jeanbarrossilva.tick.std.select
 import com.jeanbarrossilva.tick.std.selectFirst
 import java.time.LocalDateTime
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class ComposerViewModel internal constructor(
+class ToDoComposerViewModel internal constructor(
     repository: ToDoRepository,
     private val editor: ToDoEditor
 ) : ViewModel() {
@@ -60,8 +60,8 @@ class ComposerViewModel internal constructor(
         fun createFactory(repository: ToDoRepository, editor: ToDoEditor):
             ViewModelProvider.Factory {
             return viewModelFactory {
-                addInitializer(ComposerViewModel::class) {
-                    ComposerViewModel(repository, editor)
+                addInitializer(ToDoComposerViewModel::class) {
+                    ToDoComposerViewModel(repository, editor)
                 }
             }
         }

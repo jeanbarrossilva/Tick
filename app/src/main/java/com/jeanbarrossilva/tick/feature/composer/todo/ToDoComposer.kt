@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.composer
+package com.jeanbarrossilva.tick.feature.composer.todo
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
@@ -31,8 +31,8 @@ import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.feature.composer.extensions.backwardsNavigationArrow
-import com.jeanbarrossilva.tick.feature.composer.ui.reminder.ReminderSetting
+import com.jeanbarrossilva.tick.feature.composer.todo.extensions.backwardsNavigationArrow
+import com.jeanbarrossilva.tick.feature.composer.todo.ui.reminder.ReminderSetting
 import com.jeanbarrossilva.tick.platform.setting.Setting
 import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
@@ -42,8 +42,8 @@ import com.jeanbarrossilva.tick.std.selectFirst
 import java.time.LocalDateTime
 
 @Composable
-fun Composer(
-    viewModel: ComposerViewModel,
+fun ToDoComposer(
+    viewModel: ToDoComposerViewModel,
     onBackwardsNavigation: () -> Unit,
     onNavigationToGroups: (groups: SelectableList<ToDoGroup>) -> Unit,
     modifier: Modifier = Modifier
@@ -52,7 +52,7 @@ fun Composer(
     val dueDateTime by viewModel.dueDateTimeFlow.collectAsState()
     val groupsLoadable by viewModel.groupsLoadableFlow.collectAsState()
 
-    Composer(
+    ToDoComposer(
         title,
         dueDateTime,
         groupsLoadable,
@@ -70,7 +70,7 @@ fun Composer(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun Composer(
+internal fun ToDoComposer(
     title: String,
     dueDateTime: LocalDateTime?,
     groupsLoadable: Loadable<SelectableList<ToDoGroup>>,
@@ -153,9 +153,9 @@ internal fun Composer(
 @Composable
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-private fun ComposerPreview() {
+private fun ToDoComposerPreview() {
     TickTheme {
-        Composer(
+        ToDoComposer(
             ToDo.sample.title,
             ToDo.sample.dueDateTime,
             Loadable.Loaded(ToDoGroup.samples.selectFirst()),

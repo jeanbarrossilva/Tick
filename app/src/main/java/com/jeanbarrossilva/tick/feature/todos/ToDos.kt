@@ -41,7 +41,7 @@ import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 @Composable
 fun ToDos(
     viewModel: ToDosViewModel,
-    onNavigationToComposer: () -> Unit,
+    onNavigationToFork: () -> Unit,
     onBottomAreaAvailabilityChangeListener: OnBottomAreaAvailabilityChangeListener,
     modifier: Modifier = Modifier
 ) {
@@ -52,7 +52,7 @@ fun ToDos(
         ongoingToDoLoadable,
         groupsLoadable,
         onToDoToggle = { toDo, isDone -> viewModel.toggle(toDo.id, isDone) },
-        onNavigationToComposer,
+        onNavigationToFork,
         onBottomAreaAvailabilityChangeListener,
         modifier
     )

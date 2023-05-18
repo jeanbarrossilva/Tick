@@ -3,7 +3,7 @@ package com.jeanbarrossilva.tick.app.destination
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.jeanbarrossilva.tick.app.destination.destinations.ComposerDestination
+import com.jeanbarrossilva.tick.app.destination.destinations.ForkDestination
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.ToDos
@@ -29,7 +29,7 @@ internal fun ToDos(
 
     ToDos(
         viewModel,
-        onNavigationToComposer = { navigator.navigate(ComposerDestination) },
+        onNavigationToFork = { navigator.navigate(ForkDestination) },
         onBottomAreaAvailabilityChangeListener,
         modifier
     )

@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.composer.ui.reminder
+package com.jeanbarrossilva.tick.feature.composer.todo.ui.reminder
 
 import android.content.res.Configuration
 import androidx.compose.material3.Text
