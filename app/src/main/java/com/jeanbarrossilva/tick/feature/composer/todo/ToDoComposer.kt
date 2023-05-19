@@ -119,9 +119,9 @@ internal fun ToDoComposer(
         Surface(Modifier.fillMaxSize(), color = TickTheme.colorScheme.background) {
             LazyColumn(
                 contentPadding = padding +
-                    PaddingValues(TickTheme.sizes.large) +
+                    PaddingValues(TickTheme.spacings.large) +
                     PaddingValues(bottom = 73.dp),
-                verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.medium)
+                verticalArrangement = Arrangement.spacedBy(TickTheme.spacings.medium)
             ) {
                 item {
                     TextField(

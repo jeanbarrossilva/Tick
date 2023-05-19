@@ -50,7 +50,7 @@ internal fun Groups(
     modifier: Modifier = Modifier
 ) {
     val topAppBarScrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    val spacing = TickTheme.sizes.medium
+    val spacing = TickTheme.spacings.medium
 
     Scaffold(
         modifier,
@@ -71,7 +71,7 @@ internal fun Groups(
                 .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
                 .fillMaxWidth(),
             contentPadding = padding +
-                PaddingValues(top = TickTheme.sizes.large) +
+                PaddingValues(top = TickTheme.spacings.large) +
                 PaddingValues(bottom = 73.dp)
         ) {
             items(groups) { selectable ->

@@ -98,7 +98,7 @@ internal fun ToDoGroupComposer(
             LazyColumn(
                 Modifier.imePadding(),
                 contentPadding = padding +
-                    PaddingValues(TickTheme.sizes.large) +
+                    PaddingValues(TickTheme.spacings.large) +
                     PaddingValues(bottom = 73.dp)
             ) {
                 item {

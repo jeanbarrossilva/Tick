@@ -30,7 +30,7 @@ internal fun Option(
         modifier.fillMaxWidth(),
         shape = shape,
         contentPadding = ButtonDefaults.ContentPadding + PaddingValues(
-            vertical = TickTheme.sizes.medium
+            vertical = TickTheme.spacings.medium
         )
     ) {
         content()

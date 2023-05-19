@@ -41,8 +41,8 @@ import com.jeanbarrossilva.tick.platform.theme.extensions.colorAttribute
 import com.jeanbarrossilva.tick.platform.theme.extensions.end
 import com.jeanbarrossilva.tick.platform.theme.extensions.start
 import com.jeanbarrossilva.tick.platform.theme.extensions.with
-import com.jeanbarrossilva.tick.platform.theme.sizes.LocalSizes
-import com.jeanbarrossilva.tick.platform.theme.sizes.Sizes
+import com.jeanbarrossilva.tick.platform.theme.spacing.LocalSpacings
+import com.jeanbarrossilva.tick.platform.theme.spacing.Spacings
 
 /** Height of [ColorSchemePreview]. **/
 private const val COLOR_SCHEME_PREVIEW_HEIGHT = 1_909
@@ -139,9 +139,9 @@ internal object TickTheme {
     val shapes
         @Composable get() = MaterialTheme.shapes
 
-    /** Current [Sizes] from [LocalSizes]. **/
-    val sizes
-        @Composable get() = LocalSizes.current
+    /** Current [Spacings] from [LocalSpacings]. **/
+    val spacings
+        @Composable get() = LocalSpacings.current
 
     /** Current [Typography] from the underlying [MaterialTheme]. **/
     val typography
@@ -175,7 +175,7 @@ internal fun TickTheme(content: @Composable () -> Unit) {
         }
     ) {
         CompositionLocalProvider(
-            LocalSizes provides Sizes.default,
+            LocalSpacings provides Spacings.default,
             LocalTextStyle provides TickTheme.typography.bodyMedium,
             content = content
         )
@@ -281,19 +281,19 @@ private fun ShapesPreview() {
     }
 }
 
-/** Preview of [TickTheme]'s [Sizes]. **/
+/** Preview of [TickTheme]'s [Spacings]. **/
 @Composable
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-private fun SizesPreview() {
+private fun SpacingPreview() {
     TickTheme {
         Surface(Modifier.fillMaxWidth()) {
             Column {
-                SizeSection("Extra large", TickTheme.sizes.extraLarge)
-                SizeSection("Large", TickTheme.sizes.large)
-                SizeSection("Medium", TickTheme.sizes.medium)
-                SizeSection("Small", TickTheme.sizes.small)
-                SizeSection("Extra small", TickTheme.sizes.extraSmall)
+                SpacingSection("Extra large", TickTheme.spacings.extraLarge)
+                SpacingSection("Large", TickTheme.spacings.large)
+                SpacingSection("Medium", TickTheme.spacings.medium)
+                SpacingSection("Small", TickTheme.spacings.small)
+                SpacingSection("Extra small", TickTheme.spacings.extraSmall)
             }
         }
     }
@@ -396,18 +396,19 @@ private fun ShapeSection(title: String, shape: Shape, modifier: Modifier = Modif
 }
 
 /**
- * [Section] that displays the given [size].
+ * [Section] that displays the given [spacing].
  *
  * @param title Text to be shown in the header, that explains what's being displayed.
- * @param size Size in [Dp]s to be displayed.
+ * @param spacing Size in [Dp]s to be displayed.
  * @param modifier [Modifier] to be applied to the underlying [Section].
  **/
 @Composable
-private fun SizeSection(title: String, size: Dp, modifier: Modifier = Modifier) {
+private fun SpacingSection(title: String, spacing: Dp, modifier: Modifier = Modifier) {
     Section(title, modifier) { padding ->
         Text(
-            "$size",
-            Modifier.padding(start = padding.start, top = size, end = padding.end, bottom = size),
+            "$spacing",
+            Modifier
+                .padding(start = padding.start, top = spacing, end = padding.end, bottom = spacing),
             style = TickTheme.typography.titleMedium
         )
     }
@@ -429,7 +430,7 @@ private fun TypographySection(
     Section(title, modifier) {
         Column(
             modifier.padding(it),
-            Arrangement.spacedBy(TickTheme.sizes.small),
+            Arrangement.spacedBy(TickTheme.spacings.small),
             content = content
         )
     }
@@ -448,7 +449,7 @@ private fun Section(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.(padding: PaddingValues) -> Unit
 ) {
-    val padding = PaddingValues(TickTheme.sizes.large)
+    val padding = PaddingValues(TickTheme.spacings.large)
 
     Column(modifier) {
         Text(

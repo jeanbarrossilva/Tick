@@ -70,7 +70,7 @@ internal fun Setting(
             containerColor = TickTheme.colorScheme.surfaceVariant,
             contentColor = TickTheme.colorScheme.onSurface
         ),
-        contentPadding = PaddingValues(TickTheme.sizes.medium),
+        contentPadding = PaddingValues(TickTheme.spacings.medium),
         interactionSource = interactionSource
     ) {
         ProvideTextStyle(textStyle.copy(color = TickTheme.colorScheme.onSurface)) {
@@ -79,7 +79,7 @@ internal fun Setting(
                 Arrangement.SpaceBetween,
                 Alignment.CenterVertically
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.extraSmall)) {
+                Column(verticalArrangement = Arrangement.spacedBy(TickTheme.spacings.extraSmall)) {
                     label?.invoke()
 
                     ProvideTextStyle(
@@ -90,7 +90,7 @@ internal fun Setting(
                     )
                 }
 
-                Spacer(Modifier.width(TickTheme.sizes.medium))
+                Spacer(Modifier.width(TickTheme.spacings.medium))
                 action()
             }
         }

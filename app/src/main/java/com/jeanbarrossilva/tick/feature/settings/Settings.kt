@@ -29,7 +29,7 @@ internal fun Settings(modifier: Modifier = Modifier) {
 
     Surface(modifier.fillMaxSize(), color = TickTheme.colorScheme.background) {
         LazyColumn(
-            contentPadding = PaddingValues(TickTheme.sizes.large),
+            contentPadding = PaddingValues(TickTheme.spacings.large),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

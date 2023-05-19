@@ -49,9 +49,9 @@ internal fun Card(
     Card(modifier.width(256.dp)) {
         Column(
             Modifier
-                .padding(TickTheme.sizes.extraLarge * 2)
+                .padding(TickTheme.spacings.extraLarge * 2)
                 .fillMaxWidth(),
-            Arrangement.spacedBy(TickTheme.sizes.large, Alignment.CenterVertically),
+            Arrangement.spacedBy(TickTheme.spacings.large, Alignment.CenterVertically),
             Alignment.CenterHorizontally
         ) {
             Checkbox(
@@ -64,7 +64,7 @@ internal fun Card(
 
             Column(
                 Modifier.fillMaxWidth(),
-                Arrangement.spacedBy(TickTheme.sizes.medium),
+                Arrangement.spacedBy(TickTheme.spacings.medium),
                 Alignment.CenterHorizontally
             ) {
                 Text(

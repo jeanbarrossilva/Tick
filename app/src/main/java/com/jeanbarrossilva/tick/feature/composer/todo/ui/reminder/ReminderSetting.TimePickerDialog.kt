@@ -29,7 +29,7 @@ internal fun TimePickerDialog(
         modifier
     ) {
         Box(
-            Modifier.padding(TickTheme.sizes.extraLarge).fillMaxWidth(),
+            Modifier.padding(TickTheme.spacings.extraLarge).fillMaxWidth(),
             contentAlignment = Alignment.Center,
             content = content
         )

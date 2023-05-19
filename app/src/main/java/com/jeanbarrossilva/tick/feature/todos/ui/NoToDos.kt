@@ -16,7 +16,7 @@ import com.jeanbarrossilva.tick.platform.theme.TickTheme
 internal fun NoToDos(modifier: Modifier = Modifier) {
     Box(
         modifier
-            .padding(TickTheme.sizes.large)
+            .padding(TickTheme.spacings.large)
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {

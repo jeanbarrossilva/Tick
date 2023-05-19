@@ -20,7 +20,7 @@ fun Fork(
     Surface(modifier) {
         OptionGroup(
             Modifier.navigationBarsPadding(),
-            contentPadding = PaddingValues(TickTheme.sizes.large)
+            contentPadding = PaddingValues(TickTheme.spacings.large)
         ) {
             option(id = "add-to-do", onClick = onNavigationToToDoComposer) {
                 Text("Add to-do")

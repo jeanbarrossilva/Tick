@@ -103,7 +103,7 @@ internal fun ToDos(
             Modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
             state = lazyListState,
             contentPadding = padding + PaddingValues(top = spacing) + PaddingValues(bottom = 73.dp),
-            verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.extraLarge * 2)
+            verticalArrangement = Arrangement.spacedBy(TickTheme.spacings.extraLarge * 2)
         ) {
             item {
                 OngoingCard(

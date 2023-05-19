@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.theme.sizes
+package com.jeanbarrossilva.tick.platform.theme.spacing
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
  * @param small Smaller than [medium], greater than [extraSmall].
  * @param extraSmall Smallest possible size.
  **/
-data class Sizes internal constructor(
+data class Spacings internal constructor(
     val extraLarge: Dp,
     val large: Dp,
     val medium: Dp,
@@ -21,8 +21,8 @@ data class Sizes internal constructor(
     val extraSmall: Dp
 ) {
     companion object {
-        /** [Sizes] with [Dp.Unspecified] values. **/
-        internal val Unspecified = Sizes(
+        /** [Spacings] with [Dp.Unspecified] values. **/
+        internal val Unspecified = Spacings(
             extraLarge = Dp.Unspecified,
             large = Dp.Unspecified,
             medium = Dp.Unspecified,
@@ -30,9 +30,9 @@ data class Sizes internal constructor(
             extraSmall = Dp.Unspecified
         )
 
-        /** [Sizes] that's provided by default. **/
+        /** [Spacings] that are provided by default. **/
         val default
-            @Composable get() = Sizes(
+            @Composable get() = Spacings(
                 extraLarge = 32.dp,
                 large = 24.dp,
                 medium = 16.dp,

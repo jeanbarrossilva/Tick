@@ -27,7 +27,7 @@ import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
 internal object ToDoGroupDefaults {
     val spacing
-        @Composable get() = TickTheme.sizes.large
+        @Composable get() = TickTheme.spacings.large
 }
 
 @Composable
@@ -54,10 +54,10 @@ internal fun ToDoGroup(
     val isPlaceholderVisible = remember(groupLoadable) { groupLoadable !is Loadable.Loaded }
     val headlinePlaceholderColor = TickTheme.colorScheme.outline
 
-    Column(modifier, Arrangement.spacedBy(TickTheme.sizes.extraLarge)) {
+    Column(modifier, Arrangement.spacedBy(TickTheme.spacings.extraLarge)) {
         Column(
             Modifier.padding(horizontal = ToDoGroupDefaults.spacing),
-            Arrangement.spacedBy(TickTheme.sizes.extraSmall)
+            Arrangement.spacedBy(TickTheme.spacings.extraSmall)
         ) {
             Text(
                 groupLoadable.ifLoaded(ToDoGroup::title).orEmpty(),
@@ -90,7 +90,7 @@ internal fun ToDoGroup(
 
         LazyRow(
             contentPadding = PaddingValues(horizontal = ToDoGroupDefaults.spacing),
-            horizontalArrangement = Arrangement.spacedBy(TickTheme.sizes.large)
+            horizontalArrangement = Arrangement.spacedBy(TickTheme.spacings.large)
         ) {
             if (groupLoadable is Loadable.Loaded) {
                 items(groupLoadable.content.toDos()) { toDo ->

@@ -11,7 +11,7 @@ import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.std.loadable.ListLoadable
 
 private val spacing
-    @Composable get() = TickTheme.sizes.large * 2
+    @Composable get() = TickTheme.spacings.large * 2
 
 @Composable
 internal fun ToDoGroups(modifier: Modifier = Modifier) {

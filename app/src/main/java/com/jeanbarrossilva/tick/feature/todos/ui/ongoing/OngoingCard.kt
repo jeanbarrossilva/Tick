@@ -41,7 +41,7 @@ internal fun OngoingCard(
     val dueStyle = TickTheme.typography.labelLarge
     val placeholderColor = TickTheme.colorScheme.surfaceTint
     val isPlaceholderVisible = remember(toDoLoadable) { toDoLoadable !is Loadable.Loaded }
-    val spacing = TickTheme.sizes.extraLarge
+    val spacing = TickTheme.spacings.extraLarge
 
     AnimatedVisibility(
         visible = toDoLoadable !is Loadable.Loaded || toDoLoadable.content != null,
@@ -66,7 +66,7 @@ internal fun OngoingCard(
                         .`if`(isPlaceholderVisible) { width(20.dp) }
                 )
 
-                Column(verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.extraSmall)) {
+                Column(verticalArrangement = Arrangement.spacedBy(TickTheme.spacings.extraSmall)) {
                     Text(
                         toDoLoadable.contentOrNull?.title.orEmpty(),
                         Modifier
