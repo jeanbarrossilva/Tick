@@ -159,6 +159,10 @@ internal fun TickTheme(content: @Composable () -> Unit) {
         colorScheme = if (isSystemInDarkTheme()) DarkColorScheme else LightColorScheme,
         typography = with(Typography() with FontFamily.Rubik) {
             copy(
+                displayLarge = displayLarge.copy(
+                    color = fadedContentColor,
+                    fontWeight = FontWeight.Black
+                ),
                 titleLarge = titleLarge.copy(fontWeight = FontWeight.ExtraBold),
                 titleMedium = titleSmall.copy(fontSize = 18.sp, fontWeight = FontWeight.Bold),
                 titleSmall = titleSmall.copy(color = fadedContentColor, fontSize = 18.sp),

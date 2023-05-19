@@ -2,7 +2,6 @@ package com.jeanbarrossilva.tick.feature.todos
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,8 +29,9 @@ import com.jeanbarrossilva.loadable.contentOrNull
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroup
+import com.jeanbarrossilva.tick.feature.todos.ui.NoToDos
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
+import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroups
 import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
@@ -118,23 +118,35 @@ internal fun ToDos(
             }
 
             item {
-                Column(verticalArrangement = Arrangement.spacedBy(TickTheme.sizes.large * 2)) {
-                    when (groupsListLoadable) {
-                        is ListLoadable.Loading -> {
-                            repeat(24) {
-                                ToDoGroup(Loadable.Loading(), onToDoToggle = { _, _ -> })
-                            }
-                        }
-                        is ListLoadable.Populated -> {
-                            groupsListLoadable.content.forEach {
-                                ToDoGroup(it, onToDoToggle)
-                            }
-                        }
-                        else -> { }
-                    }
+                when (groupsListLoadable) {
+                    is ListLoadable.Loading -> ToDoGroups()
+                    is ListLoadable.Empty -> NoToDos()
+                    is ListLoadable.Populated -> ToDoGroups(groupsListLoadable, onToDoToggle)
+                    else -> { }
                 }
             }
         }
+    }
+}
+
+@Composable
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+private fun LoadingToDosPreview() {
+    TickTheme {
+        ToDos(ongoingToDoLoadable = Loadable.Loading(), groupsListLoadable = ListLoadable.Loading())
+    }
+}
+
+@Composable
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+private fun EmptyToDosPreview() {
+    TickTheme {
+        ToDos(
+            ongoingToDoLoadable = Loadable.Loaded(null),
+            groupsListLoadable = ListLoadable.Empty()
+        )
     }
 }
 
@@ -145,10 +157,23 @@ private fun LoadedToDosPreview() {
     TickTheme {
         ToDos(
             ongoingToDoLoadable = Loadable.Loaded(ToDo.sample),
-            groupsListLoadable = ListLoadable.Populated(ToDoGroup.samples.serialize()),
-            onToDoToggle = { _, _ -> },
-            onNavigationToComposer = { },
-            OnBottomAreaAvailabilityChangeListener.empty
+            groupsListLoadable = ListLoadable.Populated(ToDoGroup.samples.serialize())
         )
     }
+}
+
+@Composable
+private fun ToDos(
+    ongoingToDoLoadable: Loadable<ToDo?>,
+    groupsListLoadable: ListLoadable<ToDoGroup>,
+    modifier: Modifier = Modifier
+) {
+    ToDos(
+        ongoingToDoLoadable,
+        groupsListLoadable,
+        onToDoToggle = { _, _ -> },
+        onNavigationToComposer = { },
+        OnBottomAreaAvailabilityChangeListener.empty,
+        modifier
+    )
 }

@@ -107,7 +107,7 @@ fun <T : Serializable?> Flow<SerializableList<T>>.listLoadable(coroutineScope: C
     return loadable().map(Loadable<SerializableList<T>>::asListLoadable).stateIn(
         coroutineScope,
         SharingStarted.WhileSubscribed(),
-        initialValue = ListLoadable.Empty()
+        initialValue = ListLoadable.Loading()
     )
 }
 

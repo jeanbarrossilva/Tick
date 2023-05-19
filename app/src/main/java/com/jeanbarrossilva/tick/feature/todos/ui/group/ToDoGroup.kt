@@ -32,12 +32,12 @@ internal object ToDoGroupDefaults {
 
 @Composable
 internal fun ToDoGroup(
-    description: ToDoGroup,
+    group: ToDoGroup,
     onToDoToggle: (ToDo, isDone: Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val loadable = remember(description) {
-        Loadable.Loaded(description)
+    val loadable = remember(group) {
+        Loadable.Loaded(group)
     }
 
     ToDoGroup(loadable, onToDoToggle, modifier)
@@ -45,14 +45,13 @@ internal fun ToDoGroup(
 
 @Composable
 internal fun ToDoGroup(
-    descriptionLoadable: Loadable<ToDoGroup>,
+    groupLoadable: Loadable<ToDoGroup>,
     onToDoToggle: (ToDo, isDone: Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val titleStyle = TickTheme.typography.titleLarge
     val subtitleStyle = TickTheme.typography.titleSmall
-    val isPlaceholderVisible =
-        remember(descriptionLoadable) { descriptionLoadable !is Loadable.Loaded }
+    val isPlaceholderVisible = remember(groupLoadable) { groupLoadable !is Loadable.Loaded }
     val headlinePlaceholderColor = TickTheme.colorScheme.outline
 
     Column(modifier, Arrangement.spacedBy(TickTheme.sizes.extraLarge)) {
@@ -61,7 +60,7 @@ internal fun ToDoGroup(
             Arrangement.spacedBy(TickTheme.sizes.extraSmall)
         ) {
             Text(
-                descriptionLoadable.ifLoaded(ToDoGroup::title).orEmpty(),
+                groupLoadable.ifLoaded(ToDoGroup::title).orEmpty(),
                 Modifier
                     .placeholder(
                         Placeholder.Text { titleStyle },
@@ -75,8 +74,8 @@ internal fun ToDoGroup(
             Text(
                 pluralStringResource(
                     R.plurals.reminder_count,
-                    descriptionLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0,
-                    descriptionLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0
+                    groupLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0,
+                    groupLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0
                 ),
                 Modifier
                     .placeholder(
@@ -93,8 +92,8 @@ internal fun ToDoGroup(
             contentPadding = PaddingValues(horizontal = ToDoGroupDefaults.spacing),
             horizontalArrangement = Arrangement.spacedBy(TickTheme.sizes.large)
         ) {
-            if (descriptionLoadable is Loadable.Loaded) {
-                items(descriptionLoadable.content.toDos()) { toDo ->
+            if (groupLoadable is Loadable.Loaded) {
+                items(groupLoadable.content.toDos()) { toDo ->
                     Card(toDo, onToggle = { isDone -> onToDoToggle(toDo, isDone) })
                 }
             } else {
