@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.contentOrNull
 import com.jeanbarrossilva.loadable.list.serialize
@@ -102,7 +101,7 @@ internal fun ToDos(
         LazyColumn(
             Modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
             state = lazyListState,
-            contentPadding = padding + PaddingValues(top = spacing) + PaddingValues(bottom = 73.dp),
+            contentPadding = padding + PaddingValues(top = spacing) + TickTheme.overlays.fab,
             verticalArrangement = Arrangement.spacedBy(TickTheme.spacings.extraLarge * 2)
         ) {
             item {

@@ -25,6 +25,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocal
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,15 +38,19 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jeanbarrossilva.tick.platform.theme.extensions.Rubik
+import com.jeanbarrossilva.tick.platform.theme.extensions.bottom
 import com.jeanbarrossilva.tick.platform.theme.extensions.colorAttribute
 import com.jeanbarrossilva.tick.platform.theme.extensions.end
 import com.jeanbarrossilva.tick.platform.theme.extensions.start
+import com.jeanbarrossilva.tick.platform.theme.extensions.top
 import com.jeanbarrossilva.tick.platform.theme.extensions.with
+import com.jeanbarrossilva.tick.platform.theme.overlay.LocalOverlays
+import com.jeanbarrossilva.tick.platform.theme.overlay.Overlays
 import com.jeanbarrossilva.tick.platform.theme.spacing.LocalSpacings
 import com.jeanbarrossilva.tick.platform.theme.spacing.Spacings
 
 /** Height of [ColorSchemePreview]. **/
-private const val COLOR_SCHEME_PREVIEW_HEIGHT = 1_909
+private const val COLOR_SCHEME_PREVIEW_HEIGHT = 1_884
 
 /** Height of [ShapesPreview]. **/
 private const val SHAPES_PREVIEW_HEIGHT = 898
@@ -125,25 +130,29 @@ private val fadedContentColor
 
 /** Provider of [TickTheme]'s configurations. **/
 internal object TickTheme {
-    /** Current [ColorScheme] from the underlying [MaterialTheme]. **/
-    val colorScheme
-        @Composable get() = MaterialTheme.colorScheme
-
     /**
      * [Icons][androidx.compose.material.icons.Icons] in the chosen style. Alias for
      * [Icons.Rounded].
      **/
     val Icons = androidx.compose.material.icons.Icons.Rounded
 
-    /** Current [Shapes] from the underlying [MaterialTheme]. **/
+    /** [Current][CompositionLocal.current] [ColorScheme] from the underlying [MaterialTheme]. **/
+    val colorScheme
+        @Composable get() = MaterialTheme.colorScheme
+
+    /** [Current][CompositionLocal.current] [Overlays] from [LocalOverlays]. **/
+    val overlays
+        @Composable get() = LocalOverlays.current
+
+    /** [Current][CompositionLocal.current] [Shapes] from the underlying [MaterialTheme]. **/
     val shapes
         @Composable get() = MaterialTheme.shapes
 
-    /** Current [Spacings] from [LocalSpacings]. **/
+    /** [Current][CompositionLocal.current] [Spacings] from [LocalSpacings]. **/
     val spacings
         @Composable get() = LocalSpacings.current
 
-    /** Current [Typography] from the underlying [MaterialTheme]. **/
+    /** [Current][CompositionLocal.current] [Typography] from the underlying [MaterialTheme]. **/
     val typography
         @Composable get() = MaterialTheme.typography
 }
@@ -175,6 +184,7 @@ internal fun TickTheme(content: @Composable () -> Unit) {
         }
     ) {
         CompositionLocalProvider(
+            LocalOverlays provides Overlays.Default,
             LocalSpacings provides Spacings.default,
             LocalTextStyle provides TickTheme.typography.bodyMedium,
             content = content
@@ -263,6 +273,18 @@ private fun ColorSchemePreview() {
     }
 }
 
+/** Preview of [TickTheme]'s [Overlays]. **/
+@Composable
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+private fun OverlaysPreview() {
+    TickTheme {
+        Surface(color = TickTheme.colorScheme.background) {
+            OverlaySection("FAB", TickTheme.overlays.fab)
+        }
+    }
+}
+
 /** Preview of [TickTheme]'s [Shapes]. **/
 @Composable
 @Preview(heightDp = SHAPES_PREVIEW_HEIGHT)
@@ -285,7 +307,7 @@ private fun ShapesPreview() {
 @Composable
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-private fun SpacingPreview() {
+private fun SpacingsPreview() {
     TickTheme {
         Surface(Modifier.fillMaxWidth()) {
             Column {
@@ -375,6 +397,24 @@ private fun Color(color: Color) {
 }
 
 /**
+ * [Section] that displays the given [overlay].
+ *
+ * @param title Text to be shown in the header, that explains what's being displayed.
+ * @param overlay Overlay to be displayed.
+ * @param modifier [Modifier] to be applied to the underlying [Section].
+ **/
+@Composable
+private fun OverlaySection(title: String, overlay: PaddingValues, modifier: Modifier = Modifier) {
+    Section(title, modifier) {
+        Text(
+            "[${overlay.start}, ${overlay.top}, ${overlay.end}, ${overlay.bottom}]",
+            Modifier.padding(TickTheme.spacings.large),
+            style = TickTheme.typography.titleMedium
+        )
+    }
+}
+
+/**
  * [Section] that displays the given [shape].
  *
  * @param title Text to be shown in the header, that explains what's being displayed.
@@ -399,7 +439,7 @@ private fun ShapeSection(title: String, shape: Shape, modifier: Modifier = Modif
  * [Section] that displays the given [spacing].
  *
  * @param title Text to be shown in the header, that explains what's being displayed.
- * @param spacing Size in [Dp]s to be displayed.
+ * @param spacing Spacing to be displayed.
  * @param modifier [Modifier] to be applied to the underlying [Section].
  **/
 @Composable
