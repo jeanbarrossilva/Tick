@@ -70,6 +70,11 @@ data class ToDoGroup(val id: UUID, val title: String, private val toDos: List<To
             )
         )
 
+        fun empty(title: String): ToDoGroup {
+            val id = UUID.randomUUID()
+            return empty(id, title)
+        }
+
         fun empty(id: UUID, title: String): ToDoGroup {
             val toDos = emptyList<ToDo>()
             return ToDoGroup(id, title, toDos)

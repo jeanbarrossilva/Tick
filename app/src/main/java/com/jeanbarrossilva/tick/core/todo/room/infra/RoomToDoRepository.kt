@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
 class RoomToDoRepository(groupDao: RoomToDoGroupDao, toDoDao: RoomToDoDao) : ToDoRepository() {
+    override val defaultGroupTitle = DEFAULT_GROUP_TITLE
+
     private val groupsFlow = combine(
         groupDao.selectAll(),
         toDoDao.selectAll()
@@ -19,5 +21,9 @@ class RoomToDoRepository(groupDao: RoomToDoGroupDao, toDoDao: RoomToDoDao) : ToD
 
     override fun onFetch(): Flow<List<ToDoGroup>> {
         return groupsFlow
+    }
+
+    companion object {
+        internal const val DEFAULT_GROUP_TITLE = "General"
     }
 }
