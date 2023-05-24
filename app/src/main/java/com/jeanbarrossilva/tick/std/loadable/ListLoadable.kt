@@ -4,6 +4,7 @@ import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.flow.loadable
 import com.jeanbarrossilva.loadable.list.SerializableList
 import com.jeanbarrossilva.loadable.list.emptySerializableList
+import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.loadable.map
 import java.io.Serializable
 import kotlinx.coroutines.CoroutineScope
@@ -58,7 +59,7 @@ sealed interface ListLoadable<T : Serializable?> {
      * @param error [Throwable] that's been thrown while trying to load the [SerializableList].
      **/
     @JvmInline
-    value class Failed<T : Serializable?>(private val error: Throwable) : ListLoadable<T> {
+    value class Failed<T : Serializable?>(val error: Throwable) : ListLoadable<T> {
         override fun asLoadable(): Loadable<SerializableList<T>> {
             return Loadable.Failed(error)
         }
@@ -72,6 +73,18 @@ sealed interface ListLoadable<T : Serializable?> {
 }
 
 /**
+ * Returns the first element of the [SerializableList] to match the given [predicate], wrapped by a
+ * [Loadable].
+ *
+ * @param predicate Condition to which the element to be found should conform.
+ **/
+fun <T : Serializable?> ListLoadable<T>.find(predicate: (T) -> Boolean): Loadable<T?> {
+    return asLoadable().map { content ->
+        content.find(predicate)
+    }
+}
+
+/**
  * Returns the result of the given [transform] if this [ListLoadable] is
  * [populated][ListLoadable.Populated]; otherwise, `null`.
  *
@@ -79,6 +92,26 @@ sealed interface ListLoadable<T : Serializable?> {
  **/
 fun <I : Serializable?, O> ListLoadable<I>.ifPopulated(transform: SerializableList<I>.() -> O): O? {
     return if (this is ListLoadable.Populated) content.transform() else null
+}
+
+/**
+ * Applies [transform] to the [SerializableList]'s elements and returns the ones that aren't
+ * `null` if this is [populated][ListLoadable.Populated]; otherwise, creates a new instance with
+ * [O] as the type parameter.
+ *
+ * @param transform Transformation to be made to the elements of the
+ * [populated][ListLoadable.Populated] [SerializableList].
+ **/
+inline fun <I : Serializable?, reified O : Serializable?> ListLoadable<I>.mapNotNull(
+    transform: (I) -> O?
+): ListLoadable<O> {
+    return when (this) {
+        is ListLoadable.Loading -> ListLoadable.Loading()
+        is ListLoadable.Empty -> ListLoadable.Empty()
+        is ListLoadable.Populated ->
+            ListLoadable.Populated(content.mapNotNull(transform).serialize())
+        is ListLoadable.Failed -> ListLoadable.Failed(error)
+    }
 }
 
 /**

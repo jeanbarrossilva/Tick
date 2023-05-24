@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.domain.group.of
@@ -12,13 +11,9 @@ import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.extensions.filterNotEmpty
 import com.jeanbarrossilva.tick.std.loadable.ifPopulated
-import com.jeanbarrossilva.tick.std.loadable.innerMap
 import com.jeanbarrossilva.tick.std.loadable.listLoadable
-import java.time.LocalDateTime
 import java.util.UUID
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class ToDosViewModel internal constructor(
@@ -30,13 +25,6 @@ class ToDosViewModel internal constructor(
         .map(List<ToDoGroup>::filterNotEmpty)
         .map(List<ToDoGroup>::serialize)
         .listLoadable(viewModelScope)
-    internal val ongoingToDoLoadable = groupsListLoadableFlow
-        .innerMap { groups ->
-            groups.flatMap(ToDoGroup::toDos).find { toDo ->
-                toDo.dueDateTime != null && toDo.dueDateTime >= LocalDateTime.now()
-            }
-        }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Loadable.Loading())
 
     internal fun toggle(toDoID: UUID, isDone: Boolean) {
         groupsListLoadableFlow.value.ifPopulated {

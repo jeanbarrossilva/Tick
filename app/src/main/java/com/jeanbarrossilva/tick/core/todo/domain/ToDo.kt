@@ -10,12 +10,19 @@ data class ToDo(
     val dueDateTime: LocalDateTime?,
     val isDone: Boolean
 ) : Comparable<ToDo>, Serializable {
+    val isDue
+        get() = isDue(LocalDateTime.now())
+
     override fun compareTo(other: ToDo): Int {
         return if (dueDateTime != null && other.dueDateTime == null) {
             1
         } else {
             dueDateTime?.compareTo(other.dueDateTime) ?: title.compareTo(other.title)
         }
+    }
+
+    fun isDue(localDateTime: LocalDateTime): Boolean {
+        return dueDateTime != null && dueDateTime < localDateTime
     }
 
     companion object {

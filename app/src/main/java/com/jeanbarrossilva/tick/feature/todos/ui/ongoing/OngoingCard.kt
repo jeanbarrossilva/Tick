@@ -1,11 +1,6 @@
 package com.jeanbarrossilva.tick.feature.todos.ui.ongoing
 
 import android.content.res.Configuration
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,11 +38,7 @@ internal fun OngoingCard(
     val isPlaceholderVisible = remember(toDoLoadable) { toDoLoadable !is Loadable.Loaded }
     val spacing = TickTheme.spacings.extraLarge
 
-    AnimatedVisibility(
-        visible = toDoLoadable !is Loadable.Loaded || toDoLoadable.content != null,
-        enter = fadeIn() + slideInVertically { -it },
-        exit = fadeOut() + slideOutVertically { -it }
-    ) {
+    if (toDoLoadable !is Loadable.Loaded || toDoLoadable.content != null) {
         Card(modifier.fillMaxWidth(), TickTheme.shapes.extraLarge) {
             Row(
                 Modifier.padding(spacing),

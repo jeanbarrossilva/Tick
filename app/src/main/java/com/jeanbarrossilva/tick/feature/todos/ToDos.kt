@@ -3,7 +3,6 @@ package com.jeanbarrossilva.tick.feature.todos
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.rounded.Add
@@ -23,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.contentOrNull
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.todo.domain.ToDo
@@ -36,6 +34,8 @@ import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 import com.jeanbarrossilva.tick.std.loadable.ListLoadable
+import com.jeanbarrossilva.tick.std.loadable.find
+import com.jeanbarrossilva.tick.std.loadable.mapNotNull
 
 @Composable
 fun ToDos(
@@ -44,11 +44,9 @@ fun ToDos(
     onBottomAreaAvailabilityChangeListener: OnBottomAreaAvailabilityChangeListener,
     modifier: Modifier = Modifier
 ) {
-    val ongoingToDoLoadable by viewModel.ongoingToDoLoadable.collectAsState()
     val groupsLoadable by viewModel.groupsListLoadableFlow.collectAsState()
 
     ToDos(
-        ongoingToDoLoadable,
         groupsLoadable,
         onToDoToggle = { toDo, isDone -> viewModel.toggle(toDo.id, isDone) },
         onNavigationToFork,
@@ -60,7 +58,6 @@ fun ToDos(
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun ToDos(
-    ongoingToDoLoadable: Loadable<ToDo?>,
     groupsListLoadable: ListLoadable<ToDoGroup>,
     onToDoToggle: (toDo: ToDo, isDone: Boolean) -> Unit,
     onNavigationToComposer: () -> Unit,
@@ -76,6 +73,9 @@ internal fun ToDos(
     val spacing = ToDoGroupDefaults.spacing
     val topAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors()
     val topAppBarScrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val ongoingToDoLoadable = remember(groupsListLoadable) {
+        groupsListLoadable.mapNotNull { group -> group.toDos().find(ToDo::isDue) }.find(ToDo::isDue)
+    }
 
     DisposableEffect(isBottomAreaAvailable) {
         onBottomAreaAvailabilityChangeListener
@@ -108,11 +108,10 @@ internal fun ToDos(
                 OngoingCard(
                     ongoingToDoLoadable,
                     onDoneToggle = { isDone ->
-                        ongoingToDoLoadable.contentOrNull?.let { toDo ->
-                            onToDoToggle(toDo, isDone)
+                        ongoingToDoLoadable.contentOrNull?.let { ongoingToDo ->
+                            onToDoToggle(ongoingToDo, isDone)
                         }
-                    },
-                    Modifier.padding(horizontal = spacing)
+                    }
                 )
             }
 
@@ -133,7 +132,7 @@ internal fun ToDos(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun LoadingToDosPreview() {
     TickTheme {
-        ToDos(ongoingToDoLoadable = Loadable.Loading(), groupsListLoadable = ListLoadable.Loading())
+        ToDos(groupsListLoadable = ListLoadable.Loading())
     }
 }
 
@@ -142,10 +141,7 @@ private fun LoadingToDosPreview() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun EmptyToDosPreview() {
     TickTheme {
-        ToDos(
-            ongoingToDoLoadable = Loadable.Loaded(null),
-            groupsListLoadable = ListLoadable.Empty()
-        )
+        ToDos(groupsListLoadable = ListLoadable.Empty())
     }
 }
 
@@ -154,21 +150,16 @@ private fun EmptyToDosPreview() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun LoadedToDosPreview() {
     TickTheme {
-        ToDos(
-            ongoingToDoLoadable = Loadable.Loaded(ToDo.sample),
-            groupsListLoadable = ListLoadable.Populated(ToDoGroup.samples.serialize())
-        )
+        ToDos(groupsListLoadable = ListLoadable.Populated(ToDoGroup.samples.serialize()))
     }
 }
 
 @Composable
 private fun ToDos(
-    ongoingToDoLoadable: Loadable<ToDo?>,
     groupsListLoadable: ListLoadable<ToDoGroup>,
     modifier: Modifier = Modifier
 ) {
     ToDos(
-        ongoingToDoLoadable,
         groupsListLoadable,
         onToDoToggle = { _, _ -> },
         onNavigationToComposer = { },
