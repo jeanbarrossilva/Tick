@@ -3,6 +3,7 @@ package com.jeanbarrossilva.tick.feature.todos
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.rounded.Add
@@ -111,7 +112,8 @@ internal fun ToDos(
                         ongoingToDoLoadable.contentOrNull?.let { ongoingToDo ->
                             onToDoToggle(ongoingToDo, isDone)
                         }
-                    }
+                    },
+                    Modifier.padding(horizontal = spacing)
                 )
             }
 
