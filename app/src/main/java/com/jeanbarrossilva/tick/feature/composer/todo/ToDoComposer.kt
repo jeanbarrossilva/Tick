@@ -117,6 +117,7 @@ internal fun ToDoComposer(
     ) { padding ->
         Surface(Modifier.fillMaxSize(), color = TickTheme.colorScheme.background) {
             LazyColumn(
+                Modifier.imePadding(),
                 contentPadding = padding +
                     PaddingValues(TickTheme.spacings.large) +
                     TickTheme.overlays.fab,
