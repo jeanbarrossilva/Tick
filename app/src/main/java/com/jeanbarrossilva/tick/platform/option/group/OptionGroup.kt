@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.fork.ui.option.group
+package com.jeanbarrossilva.tick.platform.option.group
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,12 +11,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
-import com.jeanbarrossilva.tick.feature.fork.extensions.bottom
-import com.jeanbarrossilva.tick.feature.fork.extensions.top
-import com.jeanbarrossilva.tick.feature.fork.ui.option.Option
-import com.jeanbarrossilva.tick.feature.fork.ui.option.OptionDefaults
+import com.jeanbarrossilva.tick.platform.option.Option
+import com.jeanbarrossilva.tick.platform.option.OptionDefaults
+import com.jeanbarrossilva.tick.platform.option.extensions.bottom
+import com.jeanbarrossilva.tick.platform.option.extensions.top
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
+/**
+ * [Option]s vertically grouped together.
+ *
+ * @param modifier [Modifier] to be applied to the underlying [LazyColumn].
+ * @param contentPadding [PaddingValues] to be applied to the content.
+ * @param content [Option]s to be added through the given [OptionGroupScope].
+ **/
 @Composable
 internal fun OptionGroup(
     modifier: Modifier = Modifier,
@@ -32,14 +39,15 @@ internal fun OptionGroup(
         scope.content()
         itemsIndexed(scope.metadata) { index, metadata ->
             Option(
+                metadata.icon,
+                metadata.label,
                 metadata.onClick,
                 metadata.modifier,
                 shape = when (index) {
                     0 -> OptionDefaults.shape.top
                     scope.metadata.lastIndex -> OptionDefaults.shape.bottom
                     else -> RectangleShape
-                },
-                metadata.content
+                }
             )
 
             if (index != scope.metadata.lastIndex) {
@@ -49,6 +57,7 @@ internal fun OptionGroup(
     }
 }
 
+/** Preview of an [OptionGroup]. **/
 @Composable
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)

@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.fork.extensions
+package com.jeanbarrossilva.tick.platform.option.extensions
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
