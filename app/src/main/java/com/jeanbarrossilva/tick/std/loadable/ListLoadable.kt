@@ -108,23 +108,11 @@ inline fun <I : Serializable?, reified O : Serializable?> ListLoadable<I>.mapNot
     return when (this) {
         is ListLoadable.Loading -> ListLoadable.Loading()
         is ListLoadable.Empty -> ListLoadable.Empty()
-        is ListLoadable.Populated ->
-            ListLoadable.Populated(content.mapNotNull(transform).serialize())
+        is ListLoadable.Populated -> {
+            val mapped = content.mapNotNull(transform).serialize<O>()
+            if (mapped.isNotEmpty()) ListLoadable.Populated(mapped) else ListLoadable.Empty()
+        }
         is ListLoadable.Failed -> ListLoadable.Failed(error)
-    }
-}
-
-/**
- * Converts each emitted [ListLoadable] into a [Loadable] and applies the given [transform] to the
- * underlying [SerializableList].
- *
- * @param transform Transformation to be made to the [SerializableList].
- **/
-fun <I : Serializable?, O : Serializable?> Flow<ListLoadable<I>>.innerMap(
-    transform: (SerializableList<I>) -> O
-): Flow<Loadable<O>> {
-    return map { listLoadable ->
-        listLoadable.asLoadable().map(transform)
     }
 }
 

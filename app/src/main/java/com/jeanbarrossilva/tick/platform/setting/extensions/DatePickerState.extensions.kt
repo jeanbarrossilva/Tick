@@ -11,5 +11,5 @@ import java.time.ZoneId
 internal val DatePickerState.selectedDate
     get() = selectedDateMillis?.let {
         val zoneId = ZoneId.systemDefault()
-        Instant.ofEpochMilli(it).atZone(zoneId).toLocalDate().plusDays(1)
+        Instant.ofEpochMilli(it).atZone(zoneId).toLocalDate()
     }

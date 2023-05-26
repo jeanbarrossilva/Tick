@@ -22,7 +22,7 @@ data class ToDo(
     }
 
     fun isDue(localDateTime: LocalDateTime): Boolean {
-        return dueDateTime != null && dueDateTime < localDateTime
+        return dueDateTime != null && dueDateTime < localDateTime && !isDone
     }
 
     companion object {

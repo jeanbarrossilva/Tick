@@ -1,5 +1,6 @@
 package com.jeanbarrossilva.tick.app.destination.todos.compose.todo
 
+import android.app.Application
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,9 +24,10 @@ internal fun ToDoComposer(
     groupsResultRecipient: ResultRecipient<GroupsDestination, ToDoGroup>,
     modifier: Modifier = Modifier
 ) {
+    val application = koinInject<Application>()
     val repository = koinInject<ToDoRepository>()
     val editor = koinInject<ToDoEditor>()
-    val viewModelFactory = ToDoComposerViewModel.createFactory(repository, editor)
+    val viewModelFactory = ToDoComposerViewModel.createFactory(application, repository, editor)
     val viewModel = viewModel<ToDoComposerViewModel>(factory = viewModelFactory)
 
     groupsResultRecipient.onNavResult { result ->

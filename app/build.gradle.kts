@@ -90,6 +90,8 @@ dependencies {
     @Suppress("SpellCheckingInspection")
     implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")
 
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+
     ksp("androidx.room:room-compiler:${Versions.ROOM}")
 
     @Suppress("SpellCheckingInspection")
