@@ -12,8 +12,6 @@ import kotlinx.coroutines.flow.map
 
 class RoomToDoRepository(groupDao: RoomToDoGroupDao, private val toDoDao: RoomToDoDao) :
     ToDoRepository() {
-    override val defaultGroupTitle = DEFAULT_GROUP_TITLE
-
     private val groupsFlow = combine(
         groupDao.selectAll(),
         toDoDao.selectAll()
@@ -31,9 +29,5 @@ class RoomToDoRepository(groupDao: RoomToDoGroupDao, private val toDoDao: RoomTo
         return toDoDao.selectByID("$toDoID").map { entity ->
             entity?.toToDo()
         }
-    }
-
-    companion object {
-        internal const val DEFAULT_GROUP_TITLE = "General"
     }
 }

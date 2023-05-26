@@ -8,13 +8,23 @@ import com.jeanbarrossilva.tick.core.todo.room.domain.RoomToDoDao
 import com.jeanbarrossilva.tick.core.todo.room.domain.RoomToDoEntity
 import com.jeanbarrossilva.tick.core.todo.room.domain.group.RoomToDoGroupDao
 import com.jeanbarrossilva.tick.core.todo.room.domain.group.RoomToDoGroupEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.scope.Scope
 
 @Database(entities = [RoomToDoGroupEntity::class, RoomToDoEntity::class], version = 1)
 abstract class RoomToDoDatabase internal constructor() : RoomDatabase() {
+    internal val coroutineScope = CoroutineScope(SupervisorJob())
+
     abstract val toDoGroupDao: RoomToDoGroupDao
     abstract val toDoDao: RoomToDoDao
+
+    override fun close() {
+        super.close()
+        coroutineScope.cancel()
+    }
 
     companion object {
         private lateinit var instance: RoomToDoDatabase

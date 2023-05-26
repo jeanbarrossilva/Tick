@@ -37,7 +37,7 @@ internal class RoomToDoRepositoryTests {
         runTest {
             toDoRule.repository.fetch().map(List<ToDoGroup>::first).test {
                 val group = awaitItem()
-                assertEquals(RoomToDoRepository.DEFAULT_GROUP_TITLE, group.title)
+                assertEquals(RoomToDoEditor.DEFAULT_GROUP_TITLE, group.title)
                 assertEquals(emptyList<ToDo>(), group.toDos())
             }
         }

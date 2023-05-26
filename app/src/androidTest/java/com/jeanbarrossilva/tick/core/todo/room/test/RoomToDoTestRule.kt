@@ -10,12 +10,14 @@ import org.junit.rules.ExternalResource
 
 internal class RoomToDoTestRule : ExternalResource() {
     private val database by lazy {
-        val context = ApplicationProvider.getApplicationContext<Context>()
         Room.inMemoryDatabaseBuilder(context, RoomToDoDatabase::class.java).build()
     }
 
+    private val context
+        get() = ApplicationProvider.getApplicationContext<Context>()
+
     val repository by lazy { RoomToDoRepository(database.toDoGroupDao, database.toDoDao) }
-    val editor by lazy { RoomToDoEditor(database.toDoGroupDao, database.toDoDao, repository) }
+    val editor by lazy { RoomToDoEditor(context, database, repository) }
 
     override fun after() {
         database.clearAllTables()

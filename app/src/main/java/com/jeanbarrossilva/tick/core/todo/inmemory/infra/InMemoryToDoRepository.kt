@@ -10,8 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 
 class InMemoryToDoRepository : ToDoRepository() {
-    override val defaultGroupTitle = "Default"
-
     internal val groupsFlow = MutableStateFlow(ToDoGroup.samples)
 
     override fun onFetch(): Flow<List<ToDoGroup>> {
