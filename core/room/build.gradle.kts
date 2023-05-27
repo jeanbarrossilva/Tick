@@ -12,7 +12,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jeanbarrossilva.core.room"
+    namespace = "com.jeanbarrossilva.tick.core.room"
     compileSdk = Versions.Tick.TARGET_SDK
 
     defaultConfig {

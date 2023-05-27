@@ -1,4 +1,3 @@
-
 import com.jeanbarrossilva.tick.Versions
 
 plugins {
@@ -7,9 +6,7 @@ plugins {
 }
 
 android {
-    @Suppress("SpellCheckingInspection")
-    namespace = "com.jeanbarrossilva.platform.launchable"
-
+    namespace = "com.jeanbarrossilva.tick.platform.launchable"
     compileSdk = Versions.Tick.TARGET_SDK
 
     defaultConfig {

@@ -1,10 +1,10 @@
 package com.jeanbarrossilva.tick.app
 
-import com.jeanbarrossilva.core.room.infra.RoomToDoEditor
-import com.jeanbarrossilva.core.room.infra.RoomToDoRepository
-import com.jeanbarrossilva.core.room.infra.database
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.room.infra.RoomToDoEditor
+import com.jeanbarrossilva.tick.core.room.infra.RoomToDoRepository
+import com.jeanbarrossilva.tick.core.room.infra.database
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module
