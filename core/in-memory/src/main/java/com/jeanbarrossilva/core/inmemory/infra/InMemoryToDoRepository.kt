@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.core.todo.inmemory.infra
+package com.jeanbarrossilva.core.inmemory.infra
 
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.get

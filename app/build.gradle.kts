@@ -67,7 +67,7 @@ dependencies {
     androidTestImplementation("app.cash.turbine:turbine:0.13.0")
     androidTestImplementation(Libraries.JUNIT)
 
-    implementation(project(":core"))
+    implementation(project(":core:in-memory"))
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")

@@ -1,9 +1,9 @@
-package com.jeanbarrossilva.tick.core.todo.inmemory.infra
+package com.jeanbarrossilva.core.inmemory.infra
 
+import com.jeanbarrossilva.core.inmemory.infra.domain.group.InMemoryToDoGroupScope
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.inmemory.infra.domain.group.InMemoryToDoGroupScope
 import java.util.UUID
 
 class InMemoryToDoEditor(override val repository: InMemoryToDoRepository) : ToDoEditor() {

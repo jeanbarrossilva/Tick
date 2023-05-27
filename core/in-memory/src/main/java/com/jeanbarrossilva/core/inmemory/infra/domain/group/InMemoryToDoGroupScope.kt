@@ -1,12 +1,12 @@
-package com.jeanbarrossilva.tick.core.todo.inmemory.infra.domain.group
+package com.jeanbarrossilva.core.inmemory.infra.domain.group
 
+import com.jeanbarrossilva.core.inmemory.extensions.replacingBy
+import com.jeanbarrossilva.core.inmemory.infra.InMemoryToDoRepository
+import com.jeanbarrossilva.core.inmemory.infra.domain.InMemoryToDoScope
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.ToDoScope
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
 import com.jeanbarrossilva.tick.core.domain.group.getOrThrow
-import com.jeanbarrossilva.tick.core.todo.inmemory.extensions.replacingBy
-import com.jeanbarrossilva.tick.core.todo.inmemory.infra.InMemoryToDoRepository
-import com.jeanbarrossilva.tick.core.todo.inmemory.infra.domain.InMemoryToDoScope
 import java.util.UUID
 
 class InMemoryToDoGroupScope(

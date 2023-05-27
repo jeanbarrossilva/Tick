@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.core.todo.inmemory.extensions
+package com.jeanbarrossilva.core.inmemory.extensions
 
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
