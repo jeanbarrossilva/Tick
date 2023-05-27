@@ -3,7 +3,7 @@ package com.jeanbarrossilva.tick.app
 import android.app.Application
 import android.content.Context
 import androidx.core.content.edit
-import com.jeanbarrossilva.tick.std.launchable.Launchable
+import com.jeanbarrossilva.tick.platform.launchable.Launchable
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

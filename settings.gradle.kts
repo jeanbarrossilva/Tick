@@ -1,3 +1,2 @@
 rootProject.name = "Tick"
-include(":app", ":core", ":core:in-memory")
-include(":core:room")
+include(":app", ":core", ":core:in-memory", ":core:room", "platform:launchable")

@@ -8,10 +8,10 @@ import com.jeanbarrossilva.core.room.domain.group.RoomToDoGroupScope
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
+import com.jeanbarrossilva.tick.platform.launchable.isFirstLaunch
 import java.lang.ref.WeakReference
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class RoomToDoEditor(
@@ -66,15 +66,8 @@ class RoomToDoEditor(
     }
 
     private suspend fun addDefaultGroupOnFirstLaunch() {
-//        val context = contextRef.get() ?: return
-//        if (context.isFirstLaunch) {
-//            addDefaultGroup()
-//        }
-
-        // This is temporary and, most of all, incorrect.
-        val isFirstLaunch = repository.fetch().first().isEmpty()
-
-        if (isFirstLaunch) {
+        val context = contextRef.get() ?: return
+        if (context.isFirstLaunch) {
             addGroup(DEFAULT_GROUP_TITLE)
             hasDefaultGroupBeenAdded = true
         }

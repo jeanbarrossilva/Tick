@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.std.launchable
+package com.jeanbarrossilva.tick.platform.launchable
 
 import android.app.Application
 import android.content.Context
@@ -9,7 +9,6 @@ import android.content.Context
  *
  * @see markAsLaunched
  **/
-@Suppress("SpellCheckingInspection")
 interface Launchable {
     /** Returns the number of times this has been launched. **/
     fun count(): Int
@@ -19,14 +18,12 @@ interface Launchable {
 }
 
 /**
- * Checks whether this is the first time the application has ever been launched by the user.
+ * Whether this is the first time the application has ever been launched by the user.
  *
  * @throws IllegalStateException If the running [Application] instance isn't [Launchable].
  **/
-@Suppress("SpellCheckingInspection")
 val Context.isFirstLaunch: Boolean
     get() {
-        @Suppress("SpellCheckingInspection")
         val launchable = applicationContext as? Launchable ?: throw IllegalStateException(
             "Cannot check first launch because the Application is not Launchable."
         )

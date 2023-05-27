@@ -55,6 +55,9 @@ dependencies {
     api(project(":core"))
     api("androidx.room:room-runtime:${Versions.ROOM}")
 
+    @Suppress("SpellCheckingInspection")
+    implementation(project(":platform:launchable"))
+
     implementation(Dependencies.KOIN)
     implementation("androidx.room:room-ktx:${Versions.ROOM}")
 

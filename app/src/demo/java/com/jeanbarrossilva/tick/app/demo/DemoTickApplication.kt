@@ -4,7 +4,7 @@ import com.jeanbarrossilva.tick.app.TickApplication
 import com.jeanbarrossilva.tick.app.demo.extensions.addGroups
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
-import com.jeanbarrossilva.tick.std.launchable.isFirstLaunch
+import com.jeanbarrossilva.tick.platform.launchable.isFirstLaunch
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
