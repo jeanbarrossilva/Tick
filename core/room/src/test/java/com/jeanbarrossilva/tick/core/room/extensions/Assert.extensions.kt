@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.core.todo.room.extensions
+package com.jeanbarrossilva.tick.core.room.extensions
 
 import com.jeanbarrossilva.core.room.domain.RoomToDoEntity
 import com.jeanbarrossilva.tick.core.domain.ToDo

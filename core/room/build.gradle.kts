@@ -1,5 +1,5 @@
+
 import com.jeanbarrossilva.tick.Dependencies
-import com.jeanbarrossilva.tick.Libraries
 import com.jeanbarrossilva.tick.Versions
 
 plugins {
@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(Libraries.JUNIT)
+    androidTestImplementation(Dependencies.JUNIT)
     androidTestImplementation("androidx.test:core-ktx:1.5.0")
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("app.cash.turbine:turbine:0.13.0")
@@ -55,11 +55,11 @@ dependencies {
     api(project(":core"))
     api("androidx.room:room-runtime:${Versions.ROOM}")
 
-    @Suppress("SpellCheckingInspection")
     implementation(project(":platform:launchable"))
-
     implementation(Dependencies.KOIN)
     implementation("androidx.room:room-ktx:${Versions.ROOM}")
 
     ksp("androidx.room:room-compiler:${Versions.ROOM}")
+
+    testImplementation(Dependencies.JUNIT)
 }

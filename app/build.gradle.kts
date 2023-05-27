@@ -1,6 +1,5 @@
 import com.jeanbarrossilva.tick.Dependencies
 import com.jeanbarrossilva.tick.Dimensions
-import com.jeanbarrossilva.tick.Libraries
 import com.jeanbarrossilva.tick.Versions
 
 plugins {
@@ -93,5 +92,5 @@ dependencies {
     @Suppress("SpellCheckingInspection")
     ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.COMPOSE_DESTINATIONS}")
 
-    testImplementation(Libraries.JUNIT)
+    testImplementation(Dependencies.JUNIT)
 }

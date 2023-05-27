@@ -1,7 +1,7 @@
-package com.jeanbarrossilva.tick.core.todo.room
+package com.jeanbarrossilva.tick.core.room
 
 import com.jeanbarrossilva.core.room.domain.RoomToDoEntity
-import com.jeanbarrossilva.tick.core.todo.room.extensions.assertEquals
+import com.jeanbarrossilva.tick.core.room.extensions.assertEquals
 import java.time.LocalDateTime
 import java.util.UUID
 import org.junit.Test
