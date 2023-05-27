@@ -4,11 +4,12 @@ import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import java.util.UUID
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 abstract class ToDoRepository {
     fun fetch(): Flow<List<ToDoGroup>> {
-        return onFetch().map(List<ToDoGroup>::sorted)
+        return onFetch().distinctUntilChanged().map(List<ToDoGroup>::sorted)
     }
 
     abstract fun fetch(toDoID: UUID): Flow<ToDo?>

@@ -81,6 +81,18 @@ data class ToDoGroup(val id: UUID, val title: String, private val toDos: List<To
  * Gets the [ToDoGroup] whose [ID][ToDoGroup.id] equals to the given one.
  *
  * @param id [ID][ToDoGroup.id] of the [ToDoGroup] to be obtained.
+ **/
+@Suppress("KDocUnresolvedReference")
+operator fun Collection<ToDoGroup>.get(id: UUID): ToDoGroup? {
+    return find { toDoGroup ->
+        toDoGroup.id == id
+    }
+}
+
+/**
+ * Gets the [ToDoGroup] whose [ID][ToDoGroup.id] equals to the given one.
+ *
+ * @param id [ID][ToDoGroup.id] of the [ToDoGroup] to be obtained.
  * @throws IllegalStateException If a [ToDoGroup] with such [id] isn't found.
  **/
 @Suppress("KDocUnresolvedReference")
@@ -107,16 +119,4 @@ infix fun Collection<ToDoGroup>.of(toDoID: UUID): Pair<ToDoGroup, ToDo> {
         .entries
         .first()
         .toPair() as Pair<ToDoGroup, ToDo>
-}
-
-/**
- * Gets the [ToDoGroup] whose [ID][ToDoGroup.id] equals to the given one.
- *
- * @param id [ID][ToDoGroup.id] of the [ToDoGroup] to be obtained.
- **/
-@Suppress("KDocUnresolvedReference")
-internal operator fun Collection<ToDoGroup>.get(id: UUID): ToDoGroup? {
-    return find { toDoGroup ->
-        toDoGroup.id == id
-    }
 }
