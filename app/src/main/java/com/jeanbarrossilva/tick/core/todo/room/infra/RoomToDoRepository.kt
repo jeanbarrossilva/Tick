@@ -1,8 +1,8 @@
 package com.jeanbarrossilva.tick.core.todo.room.infra
 
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.core.todo.room.domain.RoomToDoDao
 import com.jeanbarrossilva.tick.core.todo.room.domain.group.RoomToDoGroupDao
 import java.util.UUID

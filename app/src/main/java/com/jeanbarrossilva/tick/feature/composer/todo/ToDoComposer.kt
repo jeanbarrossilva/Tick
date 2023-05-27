@@ -33,8 +33,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.backwardsNavigationArrow
 import com.jeanbarrossilva.tick.feature.composer.todo.ui.reminder.ReminderSetting
 import com.jeanbarrossilva.tick.platform.setting.Setting

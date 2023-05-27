@@ -5,7 +5,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.groups.Groups
 import com.jeanbarrossilva.tick.feature.groups.GroupsViewModel
 import com.ramcosta.composedestinations.annotation.Destination

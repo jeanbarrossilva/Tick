@@ -1,9 +1,9 @@
-package com.jeanbarrossilva.tick.core.todo.domain.group
+package com.jeanbarrossilva.tick.core.domain.group
 
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.ToDoScope
-import com.jeanbarrossilva.tick.core.todo.domain.get
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.ToDoScope
+import com.jeanbarrossilva.tick.core.domain.get
+import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import java.time.LocalDateTime
 import java.util.UUID
 import kotlinx.coroutines.flow.first

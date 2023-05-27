@@ -3,7 +3,7 @@ package com.jeanbarrossilva.tick.core.todo.room.domain
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.ToDo
 import java.time.LocalDateTime
 import java.util.UUID
 

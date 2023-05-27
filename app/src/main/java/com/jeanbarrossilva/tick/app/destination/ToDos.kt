@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jeanbarrossilva.tick.app.destination.destinations.ForkDestination
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.ToDos
 import com.jeanbarrossilva.tick.feature.todos.ToDosViewModel
 import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener

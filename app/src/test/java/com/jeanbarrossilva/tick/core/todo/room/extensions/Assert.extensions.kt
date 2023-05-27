@@ -1,6 +1,6 @@
 package com.jeanbarrossilva.tick.core.todo.room.extensions
 
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.todo.room.domain.RoomToDoEntity
 import java.time.LocalDateTime
 import java.util.UUID

@@ -1,9 +1,9 @@
 package com.jeanbarrossilva.tick.core.todo.room.infra
 
 import app.cash.turbine.test
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.core.todo.domain.group.get
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.domain.group.get
 import com.jeanbarrossilva.tick.core.todo.room.test.RoomToDoTestRule
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest

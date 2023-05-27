@@ -1,7 +1,7 @@
-package com.jeanbarrossilva.tick.core.todo.infra
+package com.jeanbarrossilva.tick.core.infra
 
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroupScope
-import com.jeanbarrossilva.tick.core.todo.domain.group.get
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
+import com.jeanbarrossilva.tick.core.domain.group.get
 import java.util.UUID
 import kotlinx.coroutines.flow.first
 

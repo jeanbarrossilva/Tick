@@ -1,9 +1,9 @@
 package com.jeanbarrossilva.tick.core.todo.room.infra
 
 import android.content.Context
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroupScope
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.core.todo.room.domain.group.RoomToDoGroupEntity
 import com.jeanbarrossilva.tick.core.todo.room.domain.group.RoomToDoGroupScope
 import com.jeanbarrossilva.tick.std.launchable.isFirstLaunch

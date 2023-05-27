@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.feature.composer.group.ToDoGroupComposer
 import com.jeanbarrossilva.tick.feature.composer.group.ToDoGroupComposerViewModel
 import com.ramcosta.composedestinations.annotation.Destination

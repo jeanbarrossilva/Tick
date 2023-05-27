@@ -67,6 +67,7 @@ dependencies {
     androidTestImplementation("app.cash.turbine:turbine:0.13.0")
     androidTestImplementation(Libraries.JUNIT)
 
+    implementation(project(":core"))
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")
@@ -85,7 +86,6 @@ dependencies {
     implementation("io.github.raamcosta.compose-destinations:core:${Versions.COMPOSE_DESTINATIONS}")
 
     implementation("io.insert-koin:koin-androidx-compose:3.4.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 
     @Suppress("SpellCheckingInspection")
     implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")

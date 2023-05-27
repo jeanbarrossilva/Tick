@@ -17,7 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.copy
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.toEpochMilli
 import com.jeanbarrossilva.tick.platform.setting.extensions.selectedDate

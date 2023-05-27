@@ -1,7 +1,7 @@
-package com.jeanbarrossilva.tick.core.todo.domain.group
+package com.jeanbarrossilva.tick.core.domain.group
 
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.get
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.get
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
@@ -70,16 +70,22 @@ data class ToDoGroup(val id: UUID, val title: String, private val toDos: List<To
             )
         )
 
-        fun empty(title: String): ToDoGroup {
-            val id = UUID.randomUUID()
-            return empty(id, title)
-        }
-
         fun empty(id: UUID, title: String): ToDoGroup {
             val toDos = emptyList<ToDo>()
             return ToDoGroup(id, title, toDos)
         }
     }
+}
+
+/**
+ * Gets the [ToDoGroup] whose [ID][ToDoGroup.id] equals to the given one.
+ *
+ * @param id [ID][ToDoGroup.id] of the [ToDoGroup] to be obtained.
+ * @throws IllegalStateException If a [ToDoGroup] with such [id] isn't found.
+ **/
+@Suppress("KDocUnresolvedReference")
+fun Collection<ToDoGroup>.getOrThrow(id: UUID): ToDoGroup {
+    return get(id) ?: throw IllegalStateException("Group $id not found.")
 }
 
 /**
@@ -113,15 +119,4 @@ internal operator fun Collection<ToDoGroup>.get(id: UUID): ToDoGroup? {
     return find { toDoGroup ->
         toDoGroup.id == id
     }
-}
-
-/**
- * Gets the [ToDoGroup] whose [ID][ToDoGroup.id] equals to the given one.
- *
- * @param id [ID][ToDoGroup.id] of the [ToDoGroup] to be obtained.
- * @throws IllegalStateException If a [ToDoGroup] with such [id] isn't found.
- **/
-@Suppress("KDocUnresolvedReference")
-internal fun Collection<ToDoGroup>.getOrThrow(id: UUID): ToDoGroup {
-    return get(id) ?: throw IllegalStateException("Group $id not found.")
 }

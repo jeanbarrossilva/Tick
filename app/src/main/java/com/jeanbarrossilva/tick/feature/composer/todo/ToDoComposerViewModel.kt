@@ -11,10 +11,10 @@ import androidx.work.await
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.flow.loadable
 import com.jeanbarrossilva.loadable.ifLoaded
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.mutableStateIn
 import com.jeanbarrossilva.tick.feature.reminder.ReminderWorker
 import com.jeanbarrossilva.tick.std.selectable.select

@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.app
 
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoRepository
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.core.todo.room.infra.RoomToDoEditor
 import com.jeanbarrossilva.tick.core.todo.room.infra.RoomToDoRepository
 import com.jeanbarrossilva.tick.core.todo.room.infra.database

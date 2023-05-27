@@ -11,7 +11,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.jeanbarrossilva.tick.app.R
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.ToDo
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId

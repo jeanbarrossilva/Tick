@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.core.todo.domain
+package com.jeanbarrossilva.tick.core.domain
 
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -41,7 +41,7 @@ data class ToDo(
  * @param id [ID][ToDo.id] of the [ToDo] to be obtained.
  **/
 @Suppress("KDocUnresolvedReference")
-internal operator fun Collection<ToDo>.get(id: UUID): ToDo? {
+operator fun Collection<ToDo>.get(id: UUID): ToDo? {
     return find { toDo ->
         toDo.id == id
     }

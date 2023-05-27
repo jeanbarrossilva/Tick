@@ -1,8 +1,8 @@
 package com.jeanbarrossilva.tick.core.todo.inmemory.infra
 
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroupScope
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.todo.inmemory.infra.domain.group.InMemoryToDoGroupScope
 import java.util.UUID
 

@@ -25,8 +25,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.loadable.contentOrNull
 import com.jeanbarrossilva.loadable.list.serialize
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.todos.ui.NoToDos
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroups

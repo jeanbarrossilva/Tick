@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.app.demo.extensions
 
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.core.todo.infra.ToDoEditor
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 
 /**
  * Adds the [groups] and all of their [to-dos][ToDoGroup.toDos].

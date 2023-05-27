@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.contentOrNull
-import com.jeanbarrossilva.tick.core.todo.domain.ToDo
+import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.feature.todos.extensions.Placeholder
 import com.jeanbarrossilva.tick.feature.todos.extensions.capitalized
 import com.jeanbarrossilva.tick.feature.todos.extensions.`if`

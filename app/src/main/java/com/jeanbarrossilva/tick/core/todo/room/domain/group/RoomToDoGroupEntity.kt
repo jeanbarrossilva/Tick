@@ -2,7 +2,7 @@ package com.jeanbarrossilva.tick.core.todo.room.domain.group
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.jeanbarrossilva.tick.core.todo.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.todo.room.domain.RoomToDoEntity
 import java.util.UUID
 

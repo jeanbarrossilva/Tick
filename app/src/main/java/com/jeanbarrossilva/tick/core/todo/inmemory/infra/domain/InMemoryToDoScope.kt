@@ -1,7 +1,7 @@
 package com.jeanbarrossilva.tick.core.todo.inmemory.infra.domain
 
-import com.jeanbarrossilva.tick.core.todo.domain.ToDoScope
-import com.jeanbarrossilva.tick.core.todo.domain.group.of
+import com.jeanbarrossilva.tick.core.domain.ToDoScope
+import com.jeanbarrossilva.tick.core.domain.group.of
 import com.jeanbarrossilva.tick.core.todo.inmemory.extensions.replacingBy
 import com.jeanbarrossilva.tick.core.todo.inmemory.infra.InMemoryToDoRepository
 import java.util.UUID
