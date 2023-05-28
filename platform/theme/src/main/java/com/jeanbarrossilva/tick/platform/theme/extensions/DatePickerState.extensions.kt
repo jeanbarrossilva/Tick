@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.setting.extensions
+package com.jeanbarrossilva.tick.platform.theme.extensions
 
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,7 +8,7 @@ import java.time.ZoneId
 
 /** [LocalDate] that's been selected. **/
 @OptIn(ExperimentalMaterial3Api::class)
-internal val DatePickerState.selectedDate
+val DatePickerState.selectedDate
     get() = selectedDateMillis?.let {
         val zoneId = ZoneId.systemDefault()
         Instant.ofEpochMilli(it).atZone(zoneId).toLocalDate()

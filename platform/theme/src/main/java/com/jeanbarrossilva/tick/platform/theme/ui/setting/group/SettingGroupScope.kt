@@ -1,11 +1,11 @@
-package com.jeanbarrossilva.tick.platform.setting.group
+package com.jeanbarrossilva.tick.platform.theme.ui.setting.group
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import com.jeanbarrossilva.tick.platform.setting.Setting
+import com.jeanbarrossilva.tick.platform.theme.ui.setting.Setting
 
 /** Scope of a [SettingGroup], through which [setting]s can be added. **/
 class SettingGroupScope internal constructor() {

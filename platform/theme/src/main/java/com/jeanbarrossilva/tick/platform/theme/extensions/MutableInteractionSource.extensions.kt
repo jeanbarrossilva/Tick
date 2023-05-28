@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.setting.extensions
+package com.jeanbarrossilva.tick.platform.theme.extensions
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource

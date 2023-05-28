@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.setting.group
+package com.jeanbarrossilva.tick.platform.theme.ui.setting.group
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
@@ -13,11 +13,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
-import com.jeanbarrossilva.tick.platform.setting.Setting
-import com.jeanbarrossilva.tick.platform.setting.SettingDefaults
-import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
-import com.jeanbarrossilva.tick.platform.setting.extensions.reversed
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.extensions.forwardsNavigationArrow
+import com.jeanbarrossilva.tick.platform.theme.extensions.reversed
+import com.jeanbarrossilva.tick.platform.theme.ui.setting.Setting
+import com.jeanbarrossilva.tick.platform.theme.ui.setting.SettingDefaults
 
 /**
  * [Setting] that holds various other [Setting]s that are related to it.

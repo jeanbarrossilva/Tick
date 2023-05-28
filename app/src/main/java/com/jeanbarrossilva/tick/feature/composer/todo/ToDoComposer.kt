@@ -37,10 +37,10 @@ import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.backwardsNavigationArrow
 import com.jeanbarrossilva.tick.feature.composer.todo.ui.reminder.ReminderSetting
-import com.jeanbarrossilva.tick.platform.setting.Setting
-import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.extensions.forwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
+import com.jeanbarrossilva.tick.platform.theme.ui.setting.Setting
 import com.jeanbarrossilva.tick.std.selectable.SelectableList
 import com.jeanbarrossilva.tick.std.selectable.selectFirst
 import java.time.LocalDateTime

@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.setting
+package com.jeanbarrossilva.tick.platform.theme.ui.setting
 
 import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -23,10 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import com.jeanbarrossilva.tick.platform.setting.extensions.EmptyMutableInteractionSource
-import com.jeanbarrossilva.tick.platform.setting.extensions.forwardsNavigationArrow
-import com.jeanbarrossilva.tick.platform.setting.extensions.`if`
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.extensions.EmptyMutableInteractionSource
+import com.jeanbarrossilva.tick.platform.theme.extensions.forwardsNavigationArrow
+import com.jeanbarrossilva.tick.platform.theme.extensions.`if`
 
 /** Default values of a [Setting]. **/
 internal object SettingDefaults {
@@ -49,7 +49,7 @@ internal object SettingDefaults {
  * @param label Primary [Text] of the headline. Being `null` hands that role to the [text].
  **/
 @Composable
-internal fun Setting(
+fun Setting(
     text: @Composable () -> Unit,
     action: @Composable () -> Unit,
     onClick: (() -> Unit)?,

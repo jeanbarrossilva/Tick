@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.setting.extensions
+package com.jeanbarrossilva.tick.platform.theme.extensions
 
 /**
  * Returns the result of the given [transform] if the [condition] is `true`; otherwise, returns the

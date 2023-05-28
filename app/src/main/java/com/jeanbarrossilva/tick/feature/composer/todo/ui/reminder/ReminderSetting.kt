@@ -20,10 +20,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.copy
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.toEpochMilli
-import com.jeanbarrossilva.tick.platform.setting.extensions.selectedDate
-import com.jeanbarrossilva.tick.platform.setting.extensions.time
-import com.jeanbarrossilva.tick.platform.setting.group.SettingGroup
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.extensions.selectedDate
+import com.jeanbarrossilva.tick.platform.theme.extensions.time
+import com.jeanbarrossilva.tick.platform.theme.ui.setting.group.SettingGroup
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
