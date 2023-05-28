@@ -6,5 +6,6 @@ include(
     ":core:room",
     "platform:launchable",
     ":platform:theme",
-    ":std:loadable"
+    ":std:loadable",
+    ":std:selectable"
 )
