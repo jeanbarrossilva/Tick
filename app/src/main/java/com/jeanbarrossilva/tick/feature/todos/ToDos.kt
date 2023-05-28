@@ -32,8 +32,8 @@ import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroupDefaults
 import com.jeanbarrossilva.tick.feature.todos.ui.group.ToDoGroups
 import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
-import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
+import com.jeanbarrossilva.tick.platform.theme.reactivity.OnBottomAreaAvailabilityChangeListener
 import com.jeanbarrossilva.tick.std.loadable.ListLoadable
 import com.jeanbarrossilva.tick.std.loadable.find
 import com.jeanbarrossilva.tick.std.loadable.mapNotNull

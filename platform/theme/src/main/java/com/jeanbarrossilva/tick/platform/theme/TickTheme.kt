@@ -37,6 +37,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jeanbarrossilva.tick.platform.theme.configuration.LocalOverlays
+import com.jeanbarrossilva.tick.platform.theme.configuration.LocalSpacings
+import com.jeanbarrossilva.tick.platform.theme.configuration.Overlays
+import com.jeanbarrossilva.tick.platform.theme.configuration.Spacings
 import com.jeanbarrossilva.tick.platform.theme.extensions.Rubik
 import com.jeanbarrossilva.tick.platform.theme.extensions.bottom
 import com.jeanbarrossilva.tick.platform.theme.extensions.colorAttribute
@@ -44,10 +48,6 @@ import com.jeanbarrossilva.tick.platform.theme.extensions.end
 import com.jeanbarrossilva.tick.platform.theme.extensions.start
 import com.jeanbarrossilva.tick.platform.theme.extensions.top
 import com.jeanbarrossilva.tick.platform.theme.extensions.with
-import com.jeanbarrossilva.tick.platform.theme.overlay.LocalOverlays
-import com.jeanbarrossilva.tick.platform.theme.overlay.Overlays
-import com.jeanbarrossilva.tick.platform.theme.spacing.LocalSpacings
-import com.jeanbarrossilva.tick.platform.theme.spacing.Spacings
 
 /** Height of [ColorSchemePreview]. **/
 private const val COLOR_SCHEME_PREVIEW_HEIGHT = 1_884

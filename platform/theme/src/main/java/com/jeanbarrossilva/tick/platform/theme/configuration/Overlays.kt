@@ -1,8 +1,15 @@
-package com.jeanbarrossilva.tick.platform.theme.overlay
+package com.jeanbarrossilva.tick.platform.theme.configuration
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.runtime.CompositionLocal
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+/** [CompositionLocal] that provides [Overlays]. **/
+internal val LocalOverlays = compositionLocalOf {
+    Overlays.Unspecified
+}
 
 /**
  * Portions of the UI taken by an element that's hierarchically higher.

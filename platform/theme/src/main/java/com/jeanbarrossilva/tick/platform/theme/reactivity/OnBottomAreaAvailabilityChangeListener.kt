@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.theme.change
+package com.jeanbarrossilva.tick.platform.theme.reactivity
 
 /**
  * Listens to changes on the availability of the utmost bottom portion of the displayed content.

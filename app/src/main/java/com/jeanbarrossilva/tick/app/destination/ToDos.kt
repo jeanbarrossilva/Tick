@@ -8,7 +8,7 @@ import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.ToDos
 import com.jeanbarrossilva.tick.feature.todos.ToDosViewModel
-import com.jeanbarrossilva.tick.platform.theme.change.OnBottomAreaAvailabilityChangeListener
+import com.jeanbarrossilva.tick.platform.theme.reactivity.OnBottomAreaAvailabilityChangeListener
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

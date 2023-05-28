@@ -1,8 +1,15 @@
-package com.jeanbarrossilva.tick.platform.theme.spacing
+package com.jeanbarrossilva.tick.platform.theme.configuration
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocal
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+/** [CompositionLocal] that provides [Spacings]. **/
+internal val LocalSpacings = compositionLocalOf {
+    Spacings.Unspecified
+}
 
 /**
  * Sizes for spacing, such as the distance between one component and another or padding.
