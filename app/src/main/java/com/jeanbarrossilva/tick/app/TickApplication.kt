@@ -2,6 +2,7 @@ package com.jeanbarrossilva.tick.app
 
 import android.app.Application
 import android.content.Context
+import androidx.annotation.Discouraged
 import androidx.core.content.edit
 import com.jeanbarrossilva.tick.platform.launchable.Launchable
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,10 @@ internal open class TickApplication : Application(), Launchable {
 
     override fun onCreate() {
         super.onCreate()
+
+        @Suppress("DiscouragedApi")
         markAsLaunched()
+
         inject()
     }
 
@@ -21,6 +25,7 @@ internal open class TickApplication : Application(), Launchable {
         return preferences.getInt(LAUNCH_COUNT_PREFERENCE_KEY, 0)
     }
 
+    @Discouraged("Should only be called by TickApplication internally.")
     override fun markAsLaunched() {
         preferences.edit {
             putInt(LAUNCH_COUNT_PREFERENCE_KEY, count() + 1)
