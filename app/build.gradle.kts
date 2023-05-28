@@ -68,10 +68,10 @@ dependencies {
     implementation(project(":core:room"))
     implementation(project(":platform:launchable"))
     implementation(project(":platform:theme"))
+    implementation(project(":std:loadable"))
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("com.jeanbarrossilva.loadable:loadable:1.4.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
 
@@ -92,6 +92,4 @@ dependencies {
 
     @Suppress("SpellCheckingInspection")
     ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.COMPOSE_DESTINATIONS}")
-
-    testImplementation(Dependencies.JUNIT)
 }

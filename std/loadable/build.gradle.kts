@@ -3,7 +3,7 @@ import com.jeanbarrossilva.tick.Versions
 
 plugins {
     id("java-library")
-    kotlin("jvm")
+    id("org.jetbrains.kotlin.jvm")
 }
 
 java {
@@ -12,5 +12,7 @@ java {
 }
 
 dependencies {
-    api(Dependencies.COROUTINES)
+    api("com.jeanbarrossilva.loadable:loadable:1.4.1")
+
+    implementation(Dependencies.COROUTINES)
 }
