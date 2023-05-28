@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.platform.option
+package com.jeanbarrossilva.tick.platform.theme.ui.option
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement

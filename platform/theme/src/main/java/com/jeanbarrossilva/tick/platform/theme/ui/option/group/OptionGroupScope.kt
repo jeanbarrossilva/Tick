@@ -1,16 +1,16 @@
-package com.jeanbarrossilva.tick.platform.option.group
+package com.jeanbarrossilva.tick.platform.theme.ui.option.group
 
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import com.jeanbarrossilva.tick.platform.option.Option
+import com.jeanbarrossilva.tick.platform.theme.ui.option.Option
 
 /** Scope of an [OptionGroup], through which [option]s can be added. **/
-internal class OptionGroupScope internal constructor() {
+class OptionGroupScope internal constructor() {
     /** [SnapshotStateList] of [OptionMetadata] from which the [Option]s will be displayed. **/
-    val metadata = mutableStateListOf<OptionMetadata>()
+    internal val metadata = mutableStateListOf<OptionMetadata>()
 
     /**
      * Creates metadata based on the given parameters for the equivalent [Option] to be displayed.
