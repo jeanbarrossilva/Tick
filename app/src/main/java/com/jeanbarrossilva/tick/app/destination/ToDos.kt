@@ -6,7 +6,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jeanbarrossilva.tick.app.destination.destinations.ForkDestination
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
-import com.jeanbarrossilva.tick.feature.todos.ToDos
 import com.jeanbarrossilva.tick.feature.todos.ToDosViewModel
 import com.jeanbarrossilva.tick.platform.theme.reactivity.OnBottomAreaAvailabilityChangeListener
 import com.ramcosta.composedestinations.annotation.Destination
@@ -25,9 +24,11 @@ internal fun ToDos(
     val repository = koinInject<ToDoRepository>()
     val editor = koinInject<ToDoEditor>()
     val viewModelFactory = ToDosViewModel.createFactory(repository, editor)
-    val viewModel = viewModel<ToDosViewModel>(factory = viewModelFactory)
+    val viewModel = viewModel<ToDosViewModel>(
+        factory = viewModelFactory
+    )
 
-    ToDos(
+    com.jeanbarrossilva.tick.feature.todos.ToDos(
         viewModel,
         onNavigationToFork = { navigator.navigate(ForkDestination) },
         onBottomAreaAvailabilityChangeListener,

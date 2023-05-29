@@ -4,7 +4,8 @@ include(
     ":core",
     ":core:in-memory",
     ":core:room",
-    "platform:launchable",
+    ":feature:todos",
+    ":platform:launchable",
     ":platform:theme",
     ":std:loadable",
     ":std:selectable"

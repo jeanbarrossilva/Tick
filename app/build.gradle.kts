@@ -60,21 +60,17 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
 }
 
 dependencies {
     implementation(project(":core:room"))
+    implementation(project(":feature:todos"))
     implementation(project(":platform:launchable"))
     implementation(project(":platform:theme"))
     implementation(project(":std:loadable"))
     implementation(project(":std:selectable"))
-    implementation("androidx.compose.material3:material3:1.1.0")
-    implementation("androidx.compose.ui:ui-tooling:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
 
     @Suppress("SpellCheckingInspection")
     implementation(
@@ -85,10 +81,6 @@ dependencies {
     implementation("io.github.raamcosta.compose-destinations:core:${Versions.COMPOSE_DESTINATIONS}")
 
     implementation(Dependencies.KOIN)
-
-    @Suppress("SpellCheckingInspection")
-    implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")
-
     implementation("androidx.work:work-runtime-ktx:2.8.1")
 
     @Suppress("SpellCheckingInspection")

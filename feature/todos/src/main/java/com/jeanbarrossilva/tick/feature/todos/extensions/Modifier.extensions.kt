@@ -16,7 +16,7 @@ import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
-abstract class Placeholder protected constructor() {
+internal abstract class Placeholder protected constructor() {
     @get:Composable
     protected abstract val height: Dp
 

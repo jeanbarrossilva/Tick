@@ -17,9 +17,9 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.loadable.Loadable
 import com.jeanbarrossilva.loadable.ifLoaded
-import com.jeanbarrossilva.tick.app.R
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
+import com.jeanbarrossilva.tick.feature.todos.R
 import com.jeanbarrossilva.tick.feature.todos.extensions.Placeholder
 import com.jeanbarrossilva.tick.feature.todos.extensions.`if`
 import com.jeanbarrossilva.tick.feature.todos.extensions.placeholder
@@ -73,7 +73,7 @@ internal fun ToDoGroup(
 
             Text(
                 pluralStringResource(
-                    R.plurals.reminder_count,
+                    R.plurals.feature_todos_reminder_count,
                     groupLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0,
                     groupLoadable.ifLoaded(ToDoGroup::toDos)?.size ?: 0
                 ),

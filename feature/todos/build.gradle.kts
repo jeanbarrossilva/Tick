@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jeanbarrossilva.tick.platform.theme"
+    namespace = "com.jeanbarrossilva.tick.feature.todos"
     compileSdk = Versions.Tick.TARGET_SDK
 
     defaultConfig {
@@ -47,8 +47,15 @@ android {
 }
 
 dependencies {
-    api("androidx.compose.material3:material3:1.1.0")
-    api("androidx.compose.ui:ui-tooling:1.4.3")
+    implementation(project(":core"))
+    implementation(project(":platform:theme"))
+    implementation(project(":std:loadable"))
 
-    implementation("com.google.android.material:material:1.9.0")
+    @Suppress("SpellCheckingInspection")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
+
+    @Suppress("SpellCheckingInspection")
+    implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")
 }
