@@ -12,3 +12,4 @@ include(
     ":std:loadable",
     ":std:selectable"
 )
+include(":feature:fork")
