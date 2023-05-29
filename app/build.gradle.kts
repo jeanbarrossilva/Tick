@@ -66,6 +66,7 @@ android {
 
 dependencies {
     implementation(project(":core:room"))
+    implementation(project(":feature:composer:group"))
     implementation(project(":feature:composer:todo"))
     implementation(project(":feature:to-dos"))
     implementation(project(":platform:launchable"))

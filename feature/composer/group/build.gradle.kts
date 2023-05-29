@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jeanbarrossilva.tick.feature.todos"
+    namespace = "com.jeanbarrossilva.tick.feature.composer.group"
     compileSdk = Versions.Tick.TARGET_SDK
 
     defaultConfig {
@@ -50,10 +50,5 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":platform:theme"))
-    implementation(project(":std:loadable"))
     implementation(Dependencies.VIEWMODEL)
-    implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
-
-    @Suppress("SpellCheckingInspection")
-    implementation("org.ocpsoft.prettytime:prettytime:5.0.4.Final")
 }
