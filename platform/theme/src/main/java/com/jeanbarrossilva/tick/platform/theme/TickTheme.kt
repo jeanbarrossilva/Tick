@@ -158,7 +158,7 @@ object TickTheme {
 }
 
 /**
- * [MaterialTheme] for Academy.
+ * [MaterialTheme] for Tick.
  *
  * @param content Content to be themed.
  **/
