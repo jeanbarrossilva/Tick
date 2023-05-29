@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.feature.reminder
+package com.jeanbarrossilva.tick.feature.composer.todo
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -10,7 +10,6 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.jeanbarrossilva.tick.app.R
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import java.time.Duration
 import java.time.LocalDateTime
@@ -18,15 +17,14 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 import java.util.UUID
 
-class ReminderWorker internal constructor(context: Context, params: WorkerParameters) :
+internal class ToDoReminderWorker(context: Context, params: WorkerParameters) :
     Worker(context, params) {
     private val toDoTitle = params.inputData.getString(TO_DO_TITLE_KEY)
         ?: throw IllegalStateException("Missing to-do title.")
 
-    private val notificationManager get() =
-        applicationContext.getSystemService<NotificationManager>() ?: throw IllegalStateException(
-            "Could not obtain the NotificationManager."
-        )
+    private val notificationManager
+        get() = applicationContext.getSystemService<NotificationManager>()
+            ?: throw IllegalStateException("Could not obtain the NotificationManager.")
 
     override fun doWork(): Result {
         sendNotification()
@@ -76,7 +74,7 @@ class ReminderWorker internal constructor(context: Context, params: WorkerParame
             val now = LocalDateTime.now().atZone(zoneId)
             val delayInMillis = now.until(zonedDueDateTime, ChronoUnit.MILLIS)
             val delay = Duration.ofMillis(delayInMillis)
-            return OneTimeWorkRequestBuilder<ReminderWorker>()
+            return OneTimeWorkRequestBuilder<ToDoReminderWorker>()
                 .setId(id)
                 .setInputData(inputData)
                 .setInitialDelay(delay)

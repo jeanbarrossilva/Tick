@@ -16,7 +16,6 @@ import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.composer.todo.extensions.mutableStateIn
-import com.jeanbarrossilva.tick.feature.reminder.ReminderWorker
 import com.jeanbarrossilva.tick.std.selectable.select
 import com.jeanbarrossilva.tick.std.selectable.selectFirst
 import java.time.LocalDateTime
@@ -44,18 +43,18 @@ class ToDoComposerViewModel internal constructor(
     internal val titleFlow = titleMutableFlow.asStateFlow()
     internal val dueDateTimeFlow = dueDateTimeMutableFlow.asStateFlow()
 
+    fun setGroup(group: ToDoGroup) {
+        groupsLoadableFlow.value.ifLoaded {
+            groupsLoadableFlow.value = Loadable.Loaded(select(group))
+        }
+    }
+
     internal fun setTitle(title: String) {
         titleMutableFlow.value = title
     }
 
     internal fun setDueDateTime(dueDateTime: LocalDateTime?) {
         dueDateTimeMutableFlow.value = dueDateTime
-    }
-
-    internal fun setGroup(group: ToDoGroup) {
-        groupsLoadableFlow.value.ifLoaded {
-            groupsLoadableFlow.value = Loadable.Loaded(select(group))
-        }
     }
 
     internal fun save() {
@@ -82,8 +81,8 @@ class ToDoComposerViewModel internal constructor(
 
     private suspend fun setUpReminder(toDo: ToDo) {
         val application = getApplication<Application>()
-        val workName = ReminderWorker.getName(toDo)
-        val workRequest = ReminderWorker.request(toDo)
+        val workName = ToDoReminderWorker.getName(toDo)
+        val workRequest = ToDoReminderWorker.request(toDo)
         WorkManager
             .getInstance(application)
             .enqueueUniqueWork(workName, ExistingWorkPolicy.KEEP, workRequest)

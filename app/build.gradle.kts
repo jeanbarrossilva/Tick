@@ -66,11 +66,14 @@ android {
 
 dependencies {
     implementation(project(":core:room"))
+    implementation(project(":feature:composer:todo"))
     implementation(project(":feature:to-dos"))
     implementation(project(":platform:launchable"))
     implementation(project(":platform:theme"))
     implementation(project(":std:loadable"))
     implementation(project(":std:selectable"))
+    implementation(Dependencies.KOIN)
+    implementation(Dependencies.WORK)
 
     @Suppress("SpellCheckingInspection")
     implementation(
@@ -79,9 +82,6 @@ dependencies {
 
     @Suppress("SpellCheckingInspection")
     implementation("io.github.raamcosta.compose-destinations:core:${Versions.COMPOSE_DESTINATIONS}")
-
-    implementation(Dependencies.KOIN)
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
     @Suppress("SpellCheckingInspection")
     ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.COMPOSE_DESTINATIONS}")

@@ -11,7 +11,7 @@ import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
 @Composable
 internal fun ConfirmationButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
-    TextButton(onClick) {
+    TextButton(onClick, modifier) {
         Text(stringResource(android.R.string.ok))
     }
 }

@@ -30,8 +30,8 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
-import com.jeanbarrossilva.tick.feature.composer.todo.extensions.backwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
+import com.jeanbarrossilva.tick.platform.theme.extensions.backwardsNavigationArrow
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 
 @Composable

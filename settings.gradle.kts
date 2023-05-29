@@ -4,6 +4,7 @@ include(
     ":core",
     ":core:in-memory",
     ":core:room",
+    ":feature:composer:todo",
     ":feature:to-dos",
     ":platform:launchable",
     ":platform:theme",

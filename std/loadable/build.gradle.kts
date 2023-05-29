@@ -12,7 +12,7 @@ java {
 }
 
 dependencies {
-    api("com.jeanbarrossilva.loadable:loadable:1.4.1")
+    api(Dependencies.LOADABLE)
 
     implementation(Dependencies.COROUTINES)
 }
