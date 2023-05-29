@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.app.destination.todos.compose.todo.groups
+package com.jeanbarrossilva.tick.app.destination.groups
 
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.std.selectable.SelectableList

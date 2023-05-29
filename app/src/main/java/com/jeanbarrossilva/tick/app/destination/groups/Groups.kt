@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.app.destination.todos.compose.todo.groups
+package com.jeanbarrossilva.tick.app.destination.groups
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

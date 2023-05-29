@@ -1,4 +1,4 @@
-package com.jeanbarrossilva.tick.app.destination.todos.compose.group
+package com.jeanbarrossilva.tick.app.destination
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
