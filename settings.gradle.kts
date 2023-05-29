@@ -6,10 +6,11 @@ include(
     ":core:room",
     ":feature:composer:group",
     ":feature:composer:todo",
+    ":feature:fork",
+    ":feature:groups",
     ":feature:to-dos",
     ":platform:launchable",
     ":platform:theme",
     ":std:loadable",
     ":std:selectable"
 )
-include(":feature:fork")
