@@ -8,6 +8,7 @@ include(
     ":feature:composer:todo",
     ":feature:fork",
     ":feature:groups",
+    ":feature:settings",
     ":feature:to-dos",
     ":platform:launchable",
     ":platform:theme",

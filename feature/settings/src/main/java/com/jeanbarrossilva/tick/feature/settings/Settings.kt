@@ -12,16 +12,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.jeanbarrossilva.tick.app.R
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 
 @Composable
-internal fun Settings(modifier: Modifier = Modifier) {
+fun Settings(appName: String, modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val appName = stringResource(R.string.app_name)
     val versionName = remember(context) {
         @Suppress("DEPRECATION")
         context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
@@ -49,6 +46,6 @@ internal fun Settings(modifier: Modifier = Modifier) {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun SettingsPreview() {
     TickTheme {
-        Settings()
+        Settings(appName = "Tick")
     }
 }

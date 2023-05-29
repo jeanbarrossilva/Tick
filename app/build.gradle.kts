@@ -70,6 +70,7 @@ dependencies {
     implementation(project(":feature:composer:todo"))
     implementation(project(":feature:fork"))
     implementation(project(":feature:groups"))
+    implementation(project(":feature:settings"))
     implementation(project(":feature:to-dos"))
     implementation(project(":platform:launchable"))
     implementation(project(":platform:theme"))
