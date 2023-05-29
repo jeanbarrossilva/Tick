@@ -66,7 +66,7 @@ android {
 
 dependencies {
     implementation(project(":core:room"))
-    implementation(project(":feature:todos"))
+    implementation(project(":feature:to-dos"))
     implementation(project(":platform:launchable"))
     implementation(project(":platform:theme"))
     implementation(project(":std:loadable"))
