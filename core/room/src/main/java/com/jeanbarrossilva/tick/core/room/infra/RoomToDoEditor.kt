@@ -10,7 +10,9 @@ import com.jeanbarrossilva.tick.platform.launchable.isFirstLaunch
 import java.lang.ref.WeakReference
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RoomToDoEditor internal constructor(
     private val contextRef: WeakReference<Context>,
@@ -48,8 +50,10 @@ class RoomToDoEditor internal constructor(
         return RoomToDoGroupScope(database.toDoDao, repository, id)
     }
 
-    override fun clear() {
-        database.clearAllTables()
+    override suspend fun clear() {
+        withContext(Dispatchers.IO) {
+            database.clearAllTables()
+        }
     }
 
     internal fun doOnDefaultGroupAddition(listener: OnDefaultGroupAdditionListener) {

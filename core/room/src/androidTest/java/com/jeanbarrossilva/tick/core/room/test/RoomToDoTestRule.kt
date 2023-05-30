@@ -7,6 +7,7 @@ import com.jeanbarrossilva.tick.core.room.infra.RoomToDoDatabase
 import com.jeanbarrossilva.tick.core.room.infra.RoomToDoEditor
 import com.jeanbarrossilva.tick.core.room.infra.RoomToDoRepository
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.junit.rules.ExternalResource
 
 internal class RoomToDoTestRule(private val coroutineScope: CoroutineScope) : ExternalResource() {
@@ -21,7 +22,7 @@ internal class RoomToDoTestRule(private val coroutineScope: CoroutineScope) : Ex
     val editor by lazy { RoomToDoEditor(context, database, repository, coroutineScope) }
 
     override fun after() {
-        editor.clear()
+        coroutineScope.launch { editor.clear() }
         database.close()
     }
 }
