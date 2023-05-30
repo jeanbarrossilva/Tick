@@ -18,12 +18,10 @@ internal class RoomToDoTestRule(private val coroutineScope: CoroutineScope) : Ex
         get() = ApplicationProvider.getApplicationContext<Context>()
 
     val repository by lazy { RoomToDoRepository(database.toDoGroupDao, database.toDoDao) }
-    val editor by lazy {
-        RoomToDoEditor(context, database.toDoGroupDao, database.toDoDao, repository, coroutineScope)
-    }
+    val editor by lazy { RoomToDoEditor(context, database, repository, coroutineScope) }
 
     override fun after() {
-        database.clearAllTables()
+        editor.clear()
         database.close()
     }
 }

@@ -20,6 +20,8 @@ abstract class ToDoEditor {
         return getGroupScope(id)
     }
 
+    abstract fun clear()
+
     protected abstract suspend fun onAddGroup(id: UUID, title: String)
 
     protected abstract fun getGroupScope(id: UUID): ToDoGroupScope

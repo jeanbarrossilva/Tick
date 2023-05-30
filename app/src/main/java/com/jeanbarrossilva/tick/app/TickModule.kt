@@ -13,14 +13,6 @@ import org.koin.dsl.module
 internal fun TickModule(): Module {
     return module {
         single<ToDoRepository> { RoomToDoRepository(database.toDoGroupDao, database.toDoDao) }
-        single<ToDoEditor> {
-            RoomToDoEditor(
-                androidContext(),
-                database.toDoGroupDao,
-                database.toDoDao,
-                repository = get(),
-                database.coroutineScope
-            )
-        }
+        single<ToDoEditor> { RoomToDoEditor(androidContext(), database, repository = get()) }
     }
 }

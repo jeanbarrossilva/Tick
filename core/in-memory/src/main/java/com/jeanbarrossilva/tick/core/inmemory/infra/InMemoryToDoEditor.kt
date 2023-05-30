@@ -14,4 +14,8 @@ class InMemoryToDoEditor(override val repository: InMemoryToDoRepository) : ToDo
     override fun getGroupScope(id: UUID): ToDoGroupScope {
         return InMemoryToDoGroupScope(repository, id)
     }
+
+    override fun clear() {
+        repository.groupsFlow.value = emptyList()
+    }
 }

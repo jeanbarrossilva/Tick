@@ -4,8 +4,6 @@ import android.content.Context
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroupScope
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
-import com.jeanbarrossilva.tick.core.room.domain.RoomToDoDao
-import com.jeanbarrossilva.tick.core.room.domain.group.RoomToDoGroupDao
 import com.jeanbarrossilva.tick.core.room.domain.group.RoomToDoGroupEntity
 import com.jeanbarrossilva.tick.core.room.domain.group.RoomToDoGroupScope
 import com.jeanbarrossilva.tick.platform.launchable.isFirstLaunch
@@ -14,23 +12,24 @@ import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class RoomToDoEditor(
+class RoomToDoEditor internal constructor(
     private val contextRef: WeakReference<Context>,
-    private val toDoGroupDao: RoomToDoGroupDao,
-    private val toDoDao: RoomToDoDao,
+    private val database: RoomToDoDatabase,
     override val repository: ToDoRepository,
     private val coroutineScope: CoroutineScope
 ) : ToDoEditor() {
     private val onDefaultGroupAdditionListeners = mutableListOf<OnDefaultGroupAdditionListener>()
     private var hasDefaultGroupBeenAdded = false
 
-    constructor(
+    constructor(context: Context, database: RoomToDoDatabase, repository: ToDoRepository) :
+        this(context, database, repository, database.coroutineScope)
+
+    internal constructor(
         context: Context,
-        toDoGroupDao: RoomToDoGroupDao,
-        toDoDao: RoomToDoDao,
+        database: RoomToDoDatabase,
         repository: ToDoRepository,
         coroutineScope: CoroutineScope
-    ) : this(WeakReference(context), toDoGroupDao, toDoDao, repository, coroutineScope)
+    ) : this(WeakReference(context), database, repository, coroutineScope)
 
     internal fun interface OnDefaultGroupAdditionListener {
         suspend fun onDefaultGroupAddition()
@@ -42,11 +41,15 @@ class RoomToDoEditor(
 
     override suspend fun onAddGroup(id: UUID, title: String) {
         val group = RoomToDoGroupEntity("$id", title)
-        toDoGroupDao.insert(group)
+        database.toDoGroupDao.insert(group)
     }
 
     override fun getGroupScope(id: UUID): ToDoGroupScope {
-        return RoomToDoGroupScope(toDoDao, repository, id)
+        return RoomToDoGroupScope(database.toDoDao, repository, id)
+    }
+
+    override fun clear() {
+        database.clearAllTables()
     }
 
     internal fun doOnDefaultGroupAddition(listener: OnDefaultGroupAdditionListener) {
