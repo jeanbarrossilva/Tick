@@ -48,4 +48,5 @@ android {
 
 dependencies {
     implementation(project(":platform:theme"))
+    implementation("androidx.compose.material:material-icons-extended:1.4.3")
 }

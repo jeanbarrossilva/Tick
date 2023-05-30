@@ -175,6 +175,7 @@ fun TickTheme(content: @Composable () -> Unit) {
                 titleLarge = titleLarge.copy(fontWeight = FontWeight.ExtraBold),
                 titleMedium = titleSmall.copy(fontSize = 18.sp, fontWeight = FontWeight.Bold),
                 titleSmall = titleSmall.copy(color = fadedContentColor, fontSize = 18.sp),
+                bodyLarge = bodyLarge.copy(fontWeight = FontWeight.Bold),
                 labelLarge = labelMedium.copy(
                     color = fadedContentColor,
                     fontSize = 16.sp,

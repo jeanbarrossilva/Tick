@@ -17,11 +17,14 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.extensions.EmptyMutableInteractionSource
@@ -54,9 +57,11 @@ fun Setting(
     action: @Composable () -> Unit,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
+    containerColor: Color = TickTheme.colorScheme.surfaceVariant,
     label: (@Composable () -> Unit)? = null,
     shape: Shape = SettingDefaults.shape
 ) {
+    val contentColor = contentColorFor(containerColor)
     val interactionSource = remember(onClick) {
         onClick?.let { MutableInteractionSource() } ?: EmptyMutableInteractionSource()
     }
@@ -66,26 +71,27 @@ fun Setting(
         onClick ?: { },
         modifier,
         shape = shape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = TickTheme.colorScheme.surfaceVariant,
-            contentColor = TickTheme.colorScheme.onSurface
-        ),
+        colors = ButtonDefaults.buttonColors(containerColor, contentColor),
         contentPadding = PaddingValues(TickTheme.spacings.medium),
         interactionSource = interactionSource
     ) {
-        ProvideTextStyle(textStyle.copy(color = TickTheme.colorScheme.onSurface)) {
+        ProvideTextStyle(textStyle.copy(color = contentColor)) {
             Row(
                 Modifier.fillMaxWidth(),
                 Arrangement.SpaceBetween,
                 Alignment.CenterVertically
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(TickTheme.spacings.extraSmall)) {
-                    label?.invoke()
-
                     ProvideTextStyle(
                         LocalTextStyle.current.`if`(label != null) {
-                            copy(color = TickTheme.colorScheme.onSurfaceVariant)
-                        },
+                            copy(fontWeight = FontWeight.Medium)
+                        }
+                    ) {
+                        label?.invoke()
+                    }
+
+                    ProvideTextStyle(
+                        LocalTextStyle.current.`if`(label != null) { copy(color = contentColor) },
                         text
                     )
                 }
@@ -129,6 +135,6 @@ private fun Setting(label: (@Composable () -> Unit)?, modifier: Modifier = Modif
         action = { Icon(TickTheme.Icons.forwardsNavigationArrow, contentDescription = "Navigate") },
         onClick = { },
         modifier,
-        label
+        label = label
     )
 }
