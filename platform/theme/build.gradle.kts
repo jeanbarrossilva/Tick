@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-    api("androidx.compose.material3:material3:1.1.0")
+    api("androidx.compose.material3:material3-android:1.2.0-alpha02")
     api("androidx.compose.ui:ui-tooling:1.4.3")
 
     implementation("com.google.android.material:material:1.9.0")

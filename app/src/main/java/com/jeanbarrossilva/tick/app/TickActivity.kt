@@ -9,6 +9,6 @@ internal class TickActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        setContent { Tick() }
+        setContent { Tick(this) }
     }
 }

@@ -78,6 +78,8 @@ dependencies {
     implementation(project(":std:selectable"))
     implementation(Dependencies.KOIN)
     implementation(Dependencies.WORK)
+    implementation("androidx.compose.material3:material3-window-size-class-android:1.2.0-alpha02")
+    implementation("com.google.accompanist:accompanist-navigation-material:0.31.3-beta")
 
     @Suppress("SpellCheckingInspection")
     implementation(
