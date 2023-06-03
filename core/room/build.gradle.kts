@@ -44,13 +44,11 @@ android {
 }
 
 dependencies {
+    androidTestImplementation(Dependencies.COROUTINES_TEST)
     androidTestImplementation(Dependencies.JUNIT)
+    androidTestImplementation(Dependencies.TURBINE)
     androidTestImplementation("androidx.test:core-ktx:1.5.0")
     androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("app.cash.turbine:turbine:0.13.0")
-    androidTestImplementation(
-        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.COROUTINES}"
-    )
 
     api(project(":core"))
     api("androidx.room:room-runtime:${Versions.ROOM}")

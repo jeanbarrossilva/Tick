@@ -10,9 +10,10 @@ import com.jeanbarrossilva.tick.core.domain.group.of
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.extensions.filterNotEmpty
+import com.jeanbarrossilva.tick.std.loadable.flow.listLoadable
 import com.jeanbarrossilva.tick.std.loadable.ifPopulated
-import com.jeanbarrossilva.tick.std.loadable.listLoadable
 import java.util.UUID
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,7 @@ class ToDosViewModel internal constructor(
         .fetch()
         .map(List<ToDoGroup>::filterNotEmpty)
         .map(List<ToDoGroup>::serialize)
-        .listLoadable(viewModelScope)
+        .listLoadable(viewModelScope, SharingStarted.WhileSubscribed())
 
     internal fun toggle(toDoID: UUID, isDone: Boolean) {
         groupsListLoadableFlow.value.ifPopulated {

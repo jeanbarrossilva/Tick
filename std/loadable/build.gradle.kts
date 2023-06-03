@@ -14,5 +14,9 @@ java {
 dependencies {
     api(Dependencies.LOADABLE)
 
-    implementation(Dependencies.COROUTINES)
+    implementation(Dependencies.COROUTINES_CORE)
+
+    testImplementation(kotlin("test"))
+    testImplementation(Dependencies.COROUTINES_TEST)
+    testImplementation(Dependencies.TURBINE)
 }

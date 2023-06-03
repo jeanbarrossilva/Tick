@@ -1,18 +1,11 @@
 package com.jeanbarrossilva.tick.std.loadable
 
 import com.jeanbarrossilva.loadable.Loadable
-import com.jeanbarrossilva.loadable.flow.loadable
 import com.jeanbarrossilva.loadable.list.SerializableList
 import com.jeanbarrossilva.loadable.list.emptySerializableList
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.loadable.map
 import java.io.Serializable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 
 /**
  * [Loadable]-like structure for representing different stages of an asynchronously-loaded
@@ -74,7 +67,7 @@ sealed interface ListLoadable<T : Serializable?> {
 
 /**
  * Returns the first element of the [SerializableList] to match the given [predicate], wrapped by a
- * [Loadable].
+ * [Loadable] matching the state of this [ListLoadable].
  *
  * @param predicate Condition to which the element to be found should conform.
  **/
@@ -114,22 +107,6 @@ inline fun <I : Serializable?, reified O : Serializable?> ListLoadable<I>.mapNot
         }
         is ListLoadable.Failed -> ListLoadable.Failed(error)
     }
-}
-
-/**
- * Maps each emission to a [ListLoadable] and emits an initial [loading][ListLoadable.Loading]
- * value.
- *
- * @param coroutineScope [CoroutineScope] in which the [StateFlow] will be started and its
- * [value][StateFlow.value] will be shared.
- **/
-fun <T : Serializable?> Flow<SerializableList<T>>.listLoadable(coroutineScope: CoroutineScope):
-    StateFlow<ListLoadable<T>> {
-    return loadable().map(Loadable<SerializableList<T>>::asListLoadable).stateIn(
-        coroutineScope,
-        SharingStarted.WhileSubscribed(),
-        initialValue = ListLoadable.Loading()
-    )
 }
 
 /** Converts this [Loadable] into a [ListLoadable]. **/

@@ -12,5 +12,5 @@ java {
 }
 
 dependencies {
-    api(Dependencies.COROUTINES)
+    api(Dependencies.COROUTINES_CORE)
 }
