@@ -2,7 +2,9 @@ rootProject.name = "Tick"
 include(
     ":app",
     ":core",
+    ":core-test",
     ":core:in-memory",
+    ":core:in-memory-test",
     ":core:room",
     ":feature:composer:group",
     ":feature:composer:todo",

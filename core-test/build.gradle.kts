@@ -3,7 +3,7 @@ import com.jeanbarrossilva.tick.Versions
 
 plugins {
     id("java-library")
-    kotlin("jvm")
+    id("org.jetbrains.kotlin.jvm")
 }
 
 java {
@@ -13,8 +13,9 @@ java {
 
 dependencies {
     api(project(":core"))
+    api(Dependencies.JUNIT)
 
-    testImplementation(project(":core:in-memory-test"))
-    testImplementation(Dependencies.COROUTINES_TEST)
-    testImplementation(Dependencies.TURBINE)
+    implementation(kotlin("test"))
+    implementation(Dependencies.COROUTINES_TEST)
+    implementation(Dependencies.TURBINE)
 }
