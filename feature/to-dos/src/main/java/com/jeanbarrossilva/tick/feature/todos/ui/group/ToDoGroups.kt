@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.jeanbarrossilva.loadable.Loadable
+import com.jeanbarrossilva.loadable.list.ListLoadable
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
-import com.jeanbarrossilva.tick.std.loadable.ListLoadable
 
 private val spacing
     @Composable get() = TickTheme.spacings.large * 2

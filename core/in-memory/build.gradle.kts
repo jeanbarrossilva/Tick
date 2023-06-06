@@ -1,4 +1,3 @@
-import com.jeanbarrossilva.tick.Dependencies
 import com.jeanbarrossilva.tick.Versions
 
 plugins {
@@ -15,6 +14,4 @@ dependencies {
     api(project(":core"))
 
     testImplementation(project(":core:in-memory-test"))
-    testImplementation(Dependencies.COROUTINES_TEST)
-    testImplementation(Dependencies.TURBINE)
 }

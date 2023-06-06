@@ -50,7 +50,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":platform:theme"))
-    implementation(project(":std:loadable"))
+    implementation(Dependencies.LOADABLE_LIST)
     implementation(Dependencies.VIEWMODEL)
     implementation("com.google.accompanist:accompanist-placeholder-material:0.31.2-alpha")
 

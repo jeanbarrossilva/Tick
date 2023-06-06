@@ -24,6 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import com.jeanbarrossilva.loadable.contentOrNull
+import com.jeanbarrossilva.loadable.list.ListLoadable
+import com.jeanbarrossilva.loadable.list.find
+import com.jeanbarrossilva.loadable.list.mapNotNull
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.domain.ToDo
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
@@ -34,9 +37,6 @@ import com.jeanbarrossilva.tick.feature.todos.ui.ongoing.OngoingCard
 import com.jeanbarrossilva.tick.platform.theme.TickTheme
 import com.jeanbarrossilva.tick.platform.theme.extensions.plus
 import com.jeanbarrossilva.tick.platform.theme.reactivity.OnBottomAreaAvailabilityChangeListener
-import com.jeanbarrossilva.tick.std.loadable.ListLoadable
-import com.jeanbarrossilva.tick.std.loadable.find
-import com.jeanbarrossilva.tick.std.loadable.mapNotNull
 
 @Composable
 fun ToDos(
