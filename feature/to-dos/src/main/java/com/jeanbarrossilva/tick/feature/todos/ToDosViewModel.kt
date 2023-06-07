@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.jeanbarrossilva.loadable.list.flow.listLoadable
 import com.jeanbarrossilva.loadable.list.ifPopulated
 import com.jeanbarrossilva.loadable.list.serialize
 import com.jeanbarrossilva.tick.core.domain.group.ToDoGroup
@@ -11,7 +12,6 @@ import com.jeanbarrossilva.tick.core.domain.group.of
 import com.jeanbarrossilva.tick.core.infra.ToDoEditor
 import com.jeanbarrossilva.tick.core.infra.ToDoRepository
 import com.jeanbarrossilva.tick.feature.todos.extensions.filterNotEmpty
-import com.jeanbarrossilva.tick.feature.todos.extensions.listLoadable
 import java.util.UUID
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
